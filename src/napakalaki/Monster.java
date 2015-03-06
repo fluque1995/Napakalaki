@@ -39,4 +39,12 @@ public class Monster {
                 badConsequence.toString();
         
     }
+    
+    public BadConsequence getBadConsequence(){
+        return this.badConsequence;
+    }
+    
+    public Prize getPrize(){
+        return this.prize;
+    }
 }
