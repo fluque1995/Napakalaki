@@ -137,6 +137,27 @@ public class Napakalaki {
         * Creating consults for some parameters.
         */
         
+        System.out.println("Monstruos con nivel mayor que 10");
+        for (Monster m : monsters){
+            if (m.getCombatLevel() > 10){
+               System.out.println(m.toString());
+            }
+        }
+        
+        System.out.println("Monstruos cuyo mal rollo implica sólo pérdida de niveles");
+        for (Monster m: monsters){
+            if (m.getBadConsequence().getNVisibleTreasures() == 0 && m.getBadConsequence().getNHiddenTreasures() == 0){
+                System.out.println(m.toString());
+            }
+        }
+        
+        System.out.println("Monstruos que te aumentan más de un nivel");
+        for (Monster m: monsters){
+            if (m.getPrize().getLevels() > 1){
+                System.out.println(m.toString());
+            }
+        }
+        
         /**
         ArrayList<TreasureKind> visibleTreasures = 
                 new ArrayList();
