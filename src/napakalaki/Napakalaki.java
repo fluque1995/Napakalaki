@@ -137,27 +137,42 @@ public class Napakalaki {
         * Creating consults for some parameters.
         */
         
-        System.out.println("Monstruos con nivel mayor que 10");
+        System.out.println("Monstruos con nivel mayor que 10:");
         for (Monster m : monsters){
             if (m.getCombatLevel() > 10){
                System.out.println(m.toString());
             }
         }
         
-        System.out.println("Monstruos cuyo mal rollo implica sólo pérdida de niveles");
+        System.out.println("Monstruos cuyo mal rollo implica sólo pérdida de niveles:");
         for (Monster m: monsters){
-            if (m.getBadConsequence().getNVisibleTreasures() == 0 && m.getBadConsequence().getNHiddenTreasures() == 0){
+            if (m.getBadConsequence().getNVisibleTreasures() == 0 && m.getBadConsequence().getNHiddenTreasures() == 0 && m.getBadConsequence().getDeath() == false){
                 System.out.println(m.toString());
             }
         }
         
-        System.out.println("Monstruos que te aumentan más de un nivel");
+        System.out.println("Monstruos que te aumentan más de un nivel:");
         for (Monster m: monsters){
             if (m.getPrize().getLevels() > 1){
                 System.out.println(m.toString());
             }
         }
         
+        System.out.println("Monstruos que te hacen perder armas de una mano:");
+        for (Monster m: monsters) {
+   
+            ArrayList<TreasureKind> specificTreasures = new ArrayList<>();
+            
+            specificTreasures.addAll(m.getBadConsequence().getSpecificVisibleTreasures());
+            specificTreasures.addAll(m.getBadConsequence().getSpecificHiddenTreasures());
+
+            for (TreasureKind treasure: specificTreasures) {
+                if (treasure == TreasureKind.ONEHAND){
+                    System.out.println(m.toString());
+                    break;
+                }
+            }
+        }
         /**
         ArrayList<TreasureKind> visibleTreasures = 
                 new ArrayList();

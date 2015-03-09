@@ -19,8 +19,8 @@ public class BadConsequence {
     private int nHiddenTreasures;
     private boolean death;
     
-    private ArrayList<TreasureKind> specificHiddenTreasures;
     private ArrayList<TreasureKind> specificVisibleTreasures;
+    private ArrayList<TreasureKind> specificHiddenTreasures;
     
     public BadConsequence(String text, int levels, int nVisible, int nHidden){
         
@@ -29,6 +29,8 @@ public class BadConsequence {
         this.nVisibleTreasures = nVisible;
         this.nHiddenTreasures = nHidden;
         this.death = false;
+        this.specificVisibleTreasures = new ArrayList();
+        this.specificHiddenTreasures = new ArrayList();
         
     }
     
@@ -39,7 +41,8 @@ public class BadConsequence {
         this.nVisibleTreasures = 0;
         this.nHiddenTreasures = 0;
         this.death = death;
-    
+        this.specificVisibleTreasures = new ArrayList();
+        this.specificHiddenTreasures = new ArrayList();
     }
     
     public BadConsequence(String text, int levels, ArrayList<TreasureKind> tVisible, 
@@ -69,6 +72,14 @@ public class BadConsequence {
     
     public int getNHiddenTreasures(){
         return this.nHiddenTreasures;
+    }
+    
+    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
+        return this.specificVisibleTreasures;
+    }
+    
+    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
+        return this.specificHiddenTreasures;
     }
     
     public boolean getDeath(){
