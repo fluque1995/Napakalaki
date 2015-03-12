@@ -146,7 +146,9 @@ public class Napakalaki {
         
         System.out.println("Monstruos cuyo mal rollo implica sólo pérdida de niveles:");
         for (Monster m: monsters){
-            if (m.getBadConsequence().getNVisibleTreasures() == 0 && m.getBadConsequence().getNHiddenTreasures() == 0 && m.getBadConsequence().getDeath() == false){
+            if (m.getBadConsequence().getNVisibleTreasures() == 0 && m.getBadConsequence().getNHiddenTreasures() == 0 && m.getBadConsequence().getDeath() == false
+            && m.getBadConsequence().getSpecificVisibleTreasures().isEmpty() && 
+            m.getBadConsequence().getSpecificHiddenTreasures().isEmpty()){
                 System.out.println(m.toString());
             }
         }
