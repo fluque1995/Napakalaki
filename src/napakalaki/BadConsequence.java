@@ -87,8 +87,23 @@ public class BadConsequence {
     }
     
     public String toString(){
-        return "Text = " + text + ", levels = " + Integer.toString(levels) +
-                ", visible treasures = " + Integer.toString(nVisibleTreasures) +
-                ", hidden treasures = " + Integer.toString(nHiddenTreasures);
+        String printable ="Text = " + text + "\n\t\tLevels = " + Integer.toString(levels) +
+                          ", visible treasures = " + Integer.toString(nVisibleTreasures) +
+                          ", hidden treasures = " + Integer.toString(nHiddenTreasures);
+        
+        if (!this.specificVisibleTreasures.isEmpty()){
+            printable += "\n\t\tSpecific visible treasures = ";
+            for (TreasureKind treasure: this.specificVisibleTreasures){
+                printable += treasure.name() + ", ";
+            }
+        }
+        
+        if (!this.specificHiddenTreasures.isEmpty()){
+            printable += "\n\t\tSpecific hidden treasures = ";
+            for (TreasureKind treasure: this.specificHiddenTreasures){
+                printable += treasure.name() + ", ";
+            }
+        }
+        return printable;
     }
 }
