@@ -6,8 +6,17 @@
 package napakalaki;
 
 /**
- *
- * @author paco
+ * Clase que representa las cartas de monstruo que hay en el juego. Cada instancia
+ * de esta clase representa una carta de monstruo. Contiene información relativa
+ * a este para el combate:
+ * <P>
+ * 1.- Nombre del monstruo<P>
+ * 2.- Nivel de combate<P>
+ * 3.- Premio por victoria en combate, representado por un objeto de la clase Prize<P>
+ * 4.- Mal rollo que provoca en el jugador si pierde el combate, representado por
+ * un objeto de la clase BadConsequence
+ * @see BadConsequence
+ * @see Prize
  */
 public class Monster {
     
@@ -16,6 +25,13 @@ public class Monster {
     private Prize prize;
     private BadConsequence badConsequence;
     
+    /**
+     * Constructor con parámetros para el monstruo.
+     * @param name Nombre del monstruo
+     * @param combatLevel Nivel de combate
+     * @param prize Premio por victoria
+     * @param bc Mal rollo por derrota
+     */
     public Monster(String name, int combatLevel, Prize prize, BadConsequence bc){
         
         this.name = name;
@@ -24,27 +40,50 @@ public class Monster {
         this.badConsequence = bc;
     }
     
+    /**
+     * Getter para el nombre del monstruo.
+     * @return String con dicho nombre
+     */
     public String getName(){
         return this.name;
     }
     
+    /**
+     * Getter para el nivel de combate del monstruo
+     * @return Nivel de combate
+     */
     public int getCombatLevel(){
         return this.combatLevel;
     }
     
+    /**
+     * Getter para el mal rollo que provoca el monstruo
+     * @return Objeto de la clase BadConsequence que representa dicho mal rollo
+     */
+    public BadConsequence getBadConsequence(){
+        return this.badConsequence;
+    }
+    
+    /**
+     * Getter para el premio que otorga el monstruo
+     * @return Objeto de la clase Prize que representa dicho premio
+     */
+    public Prize getPrize(){
+        return this.prize;
+    }
+    
+    /**
+     * Método que devuelve un String con la información relativa al monstruo.
+     * @return String con la información relativa al monstruo. Devuelve su nombre,
+     * nivel de combate, premio y mal rollo.
+     * @see BadConsequence#toString()
+     * @see Prize#toString()
+     */
     public String toString(){
         
         return "Name = " + name + ", combat level = " + Integer.toString(combatLevel) +
                 "\n\tPrize: " + prize.toString() + "\n\tBad consequence: " +
                 badConsequence.toString() + "\n";
         
-    }
-    
-    public BadConsequence getBadConsequence(){
-        return this.badConsequence;
-    }
-    
-    public Prize getPrize(){
-        return this.prize;
     }
 }

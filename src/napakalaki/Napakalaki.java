@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
- * @author paco
+ * Clase principal del juego Napakalaki. Gestiona la ejecución
+ * del juego
+ * @author Francisco Luque y Antonio Moya
  */
 public class Napakalaki {
 
@@ -173,29 +174,6 @@ public class Napakalaki {
                 }
             }
         }
-        /**
-        ArrayList<TreasureKind> visibleTreasures = 
-                new ArrayList();
-        
-        visibleTreasures.add(TreasureKind.ARMOR);
-        visibleTreasures.add(TreasureKind.HELMET);
-        
-        ArrayList<TreasureKind> hiddenTreasures = 
-                new ArrayList();
-        
-        hiddenTreasures.add(TreasureKind.ONEHAND);
-        hiddenTreasures.add(TreasureKind.BOTHHANDS);
-        
-        Prize prize = new Prize(2, 1);
-        
-        
-        BadConsequence badConsequence = 
-                new BadConsequence("Ta foshao hermano", 2, visibleTreasures, hiddenTreasures);
-        
-        Monster daMonsta = new Monster("Papichulo", 10, prize, badConsequence);
-        
-        System.out.println(daMonsta.toString());
-    */
     }
     
 }
