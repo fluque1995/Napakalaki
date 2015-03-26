@@ -24,15 +24,21 @@ public class Player {
     BadConsequence pendingBadConsequence;
 
     void bringToLive(){
-        
+        this.dead = false;
     }
     
     void incrementLevels(int levels){
         this.level += levels;
+        if (this.level > 10){
+            this.level = 10;
+        }
     }
     
     void decrementLevels(int levels){
         this.level -= levels;
+        if (this.level < 1){
+            this.level = 1;
+        }
     }
     
     void setPendingBadConsequence(BadConsequence badConsequence){
@@ -48,11 +54,13 @@ public class Player {
     }
     
     void dieIfNoTreasures(){
-        
+        if(this.hiddenTreasures.isEmpty() && this.visibleTreasures.isEmpty()){
+            this.dead = true;
+        }
     }
     
     boolean canIBuyLevels(int levels){
-        
+        return (this.level + levels < 10);
     }
     
     protected float computeGoldCoinsValue(ArrayList<Treasure> treasures){
@@ -96,7 +104,8 @@ public class Player {
     }
     
     boolean validState(){
-        
+        return this.pendingBadConsequence == null &&
+                this.hiddenTreasures.size() <= MAXHIDDENTREASURES;
     }
     
     boolean initTreasures(){
@@ -108,7 +117,7 @@ public class Player {
     }
     
     boolean hasVisibleTreasures(){
-        
+        return not this.visibleTreasures.isEmpty();
     }
     
     Player(String name){
