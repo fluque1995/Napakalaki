@@ -54,6 +54,46 @@ public class Napakalaki {
     boolean makeTreasureVisible(Treasure treasure){
         
     }
+    
+    boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
+        
+    }
+    
+    void initGame(ArrayList<String> players){
+        
+    }
+    
+    Player getCurrentPlayer(){
+        return this.currentPlayer;
+    }
+    
+    Monster getCurrentMonster(){
+        return this.currentMonster;
+    }
+    
+    boolean canMakeVisibleTreasure(){
+        
+    }
+    
+    ArrayList<Treasure> getVisibleTreasures(){
+        
+    }
+    
+    ArrayList<Treasure> getHiddenTreasures(){
+        
+    }
+    
+    boolean nextTurn(){
+        
+    }
+    
+    boolean newtTurnAllowed(){
+        
+    }
+    
+    boolean endOfGame(CombatResult result){
+        
+    }
     /**
      * @param args the command line arguments
      */
