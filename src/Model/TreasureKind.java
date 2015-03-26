@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package napakalaki;
+package Model;
 
 /**
  * Enumerado que contiene la información relativa respecto a los tipos de tesoros
@@ -31,7 +31,7 @@ public enum TreasureKind {
      */
     SHOE,
     /**
-     * Objeto de tipo armadura de rodillas
+     * Objeto de tipo collar
      */
     NECKLACE;
 }

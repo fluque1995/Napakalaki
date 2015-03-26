@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package napakalaki;
+package Model;
 
 import java.util.ArrayList;
 
@@ -83,10 +83,27 @@ public class BadConsequence {
         this.nHiddenTreasures = 0;
         this.death = false;
         this.specificVisibleTreasures = tVisible;
-        this.specificHiddenTreasures = tHidden;
-        
+        this.specificHiddenTreasures = tHidden;    
     }
     
+    /**
+     * Comprueba si el mal rollo está vacío.
+     * @return Boolean que indica si el mal rollo está vacío
+     */
+    public boolean isEmpty(){
+        return this.text.isEmpty() && this.levels == 0 && this.nVisibleTreasures == 0 &&
+                this.nHiddenTreasures == 0 && death == false && this.specificVisibleTreasures == null &&
+                this.specificHiddenTreasures == null;
+    }
+    
+    /**
+     * Getter para el boolean que indica si el monstruo te mata
+     * @return Valor del boolean
+     */
+    public boolean kills(){
+        return this.death;
+    }
+
     /**
      * Getter para el texto de BadConsequence.
      * @return String con el texto
@@ -135,12 +152,16 @@ public class BadConsequence {
         return this.specificHiddenTreasures;
     }
     
-    /**
-     * Getter para el boolean que indica si el monstruo te mata
-     * @return Valor del boolean
-     */
-    public boolean getDeath(){
-        return this.death;
+    public void substractVisibleTreasure(Treasure treasure){
+        
+    }
+    
+    public void substractHiddenTreasure(Treasure treasure){
+        
+    }
+    
+    public BadConsequence adjustToFitTreasureList(ArrayList<Treasure> h, ArrayList<Treasure> v){
+        
     }
     
     /**
