@@ -3,22 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package napakalaki;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Clase principal del juego Napakalaki. Gestiona la ejecución
- * del juego
- * @author Francisco Luque y Antonio Moya
+ *
+ * @author paco
  */
-public class Napakalaki {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class CardDealer {
+    
+    private static CardDealer instance = null;
+    ArrayList<Treasure> unusedTreasures, usedTreasures;
+    ArrayList<Monster> unusedMonsters, usedMonsters;
+    
+    private CardDealer(){}
+    
+    void shuffleTreasures(){
+        
+    }
+    
+    void shuffleMonsters(){
+        
+    }
+    
+    CardDealer getInstance(){
+        if(instance == null){
+            instance = new CardDealer();
+        }
+        return instance;
+    }
+    
+    Treasure nextTreasure(){
+        
+    }
+    
+    Monster nextMonster(){
+        
+    }
+    
+    void giveTreasureBack(Treasure treasure){
+        
+    }
+    
+    void giveMonsterBack(Monster monster){
+        
+    }
+    
+    void initCards(){
+        
+    }
+    
+    void initTreasureCardDeck(){
+        
+    }
+    
+    void initMonsterCardDeck(){
         
         /**
          * Initialization of monsters array
@@ -133,52 +174,5 @@ public class Napakalaki {
                         new ArrayList());
         prize = new Prize(1,1);
         monsters.add(new Monster("Bicéfalo", 20, prize, badConsequence));
-        
-        /*
-        * Creating consults for some parameters.
-        */
-        
-        System.out.println("Monstruos con nivel mayor que 10:");
-        for (Monster m: monsters){
-            if (m.getCombatLevel() > 10){
-               System.out.println(m.toString());
-            }
-        }
-        
-        System.out.println("Monstruos cuyo mal rollo implica sólo pérdida de niveles:");
-        for (Monster m: monsters){
-            if (m.getBadConsequence().getNVisibleTreasures() == 0 && m.getBadConsequence().getNHiddenTreasures() == 0 && m.getBadConsequence().getDeath() == false
-            && m.getBadConsequence().getSpecificVisibleTreasures().isEmpty() && 
-            m.getBadConsequence().getSpecificHiddenTreasures().isEmpty()){
-                System.out.println(m.toString());
-            }
-        }
-        
-        System.out.println("Monstruos que te aumentan más de un nivel:");
-        for (Monster m: monsters){
-            if (m.getPrize().getLevels() > 1){
-                System.out.println(m.toString());
-            }
-        }
-        
-        System.out.println("Monstruos que te hacen perder armas de una mano:");
-        for (Monster m: monsters) {
-   
-            ArrayList<TreasureKind> specificTreasures = new ArrayList<>();
-            
-            specificTreasures.addAll(m.getBadConsequence().getSpecificVisibleTreasures());
-            specificTreasures.addAll(m.getBadConsequence().getSpecificHiddenTreasures());
-
-            for (TreasureKind treasure: specificTreasures) {
-                if (treasure == TreasureKind.ONEHAND){
-                    System.out.println(m.toString());
-                    break;
-                }
-            }
-        }
-        
-        
-        
     }
-    
 }
