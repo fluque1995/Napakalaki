@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Random;
+
 /**
  *
  * @author paco
@@ -12,8 +14,11 @@ package Model;
 public class Dice {
     
     private static Dice instance = null;
+    Random rnd;
     
-    private Dice(){}
+    private Dice(){
+        rnd = new Random();
+    }
     
     public static Dice getInstance() {
         if(instance == null){
@@ -23,6 +28,6 @@ public class Dice {
     }
     
     int nextNumber(){
-        
+        return rnd.nextInt(6) + 1;
     }
 }
