@@ -22,8 +22,8 @@ public class Monster {
     
     private String name;
     private int combatLevel;
-    private Prize prize;
     private BadConsequence badConsequence;
+    private Prize prize;
     
     /**
      * Constructor con parámetros para el monstruo.
@@ -32,12 +32,12 @@ public class Monster {
      * @param prize Premio por victoria
      * @param bc Mal rollo por derrota
      */
-    public Monster(String name, int combatLevel, Prize prize, BadConsequence bc){
+    public Monster(String name, int combatLevel, BadConsequence bc, Prize prize){
         
         this.name = name;
         this.combatLevel = combatLevel;
-        this.prize = prize;
         this.badConsequence = bc;
+        this.prize = prize;
     }
     
     /**
@@ -52,7 +52,7 @@ public class Monster {
      * Getter para el nivel de combate del monstruo
      * @return Nivel de combate
      */
-    public int getCombatLevel(){
+    public int getLevel(){
         return this.combatLevel;
     }
     
