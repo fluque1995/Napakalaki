@@ -12,18 +12,28 @@ package Model;
  * <P>
  * 1.- Nombre del monstruo<P>
  * 2.- Nivel de combate<P>
- * 3.- Premio por victoria en combate, representado por un objeto de la clase Prize<P>
+ * 3.- Premio por victoria en combate, representado por un objeto de la clase {@link Prize}<P>
  * 4.- Mal rollo que provoca en el jugador si pierde el combate, representado por
- * un objeto de la clase BadConsequence
- * @see BadConsequence
- * @see Prize
+ * un objeto de la clase {@link BadConsequence}
  */
 public class Monster {
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                               Attributes                               //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
     
     private String name;
     private int combatLevel;
     private BadConsequence badConsequence;
     private Prize prize;
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                               Constructor                              //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
     
     /**
      * Constructor con parámetros para el monstruo.
@@ -39,6 +49,12 @@ public class Monster {
         this.badConsequence = bc;
         this.prize = prize;
     }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                                 Getters                                //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
     
     /**
      * Getter para el nombre del monstruo.

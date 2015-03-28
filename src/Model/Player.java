@@ -13,53 +13,53 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    boolean dead;
-    String name;
-    int level;
+    private boolean dead;
+    private String name;
+    private int level;
     
-    static final int MAXHIDDENTREASURES = 4;
+    private static final int MAXHIDDENTREASURES = 4;
     
-    ArrayList<Treasure> hiddenTreasures;
-    ArrayList<Treasure> visibleTreasures;
-    BadConsequence pendingBadConsequence;
+    private ArrayList<Treasure> hiddenTreasures;
+    private ArrayList<Treasure> visibleTreasures;
+    private BadConsequence pendingBadConsequence;
 
-    void bringToLive(){
+    private void bringToLive(){
         this.dead = false;
     }
     
-    void incrementLevels(int levels){
+    private void incrementLevels(int levels){
         this.level += levels;
         if (this.level > 10){
             this.level = 10;
         }
     }
     
-    void decrementLevels(int levels){
+    private void decrementLevels(int levels){
         this.level -= levels;
         if (this.level < 1){
             this.level = 1;
         }
     }
     
-    void setPendingBadConsequence(BadConsequence badConsequence){
+    private void setPendingBadConsequence(BadConsequence badConsequence){
         this.pendingBadConsequence = badConsequence;
     }
     
-    void die(){
+    private void die(){
         this.dead = true;
     }
     
-    void discardNecklaceIfVisible(){
+    private void discardNecklaceIfVisible(){
         
     }
     
-    void dieIfNoTreasures(){
+    private void dieIfNoTreasures(){
         if(this.hiddenTreasures.isEmpty() && this.visibleTreasures.isEmpty()){
             this.dead = true;
         }
     }
     
-    boolean canIBuyLevels(int levels){
+    private boolean canIBuyLevels(int levels){
         return (this.level + levels < 10);
     }
     
@@ -67,68 +67,70 @@ public class Player {
         
     }
     
-    void applyPrize(Prize prize){
+    public void applyPrize(Prize prize){
         
     }
     
-    CombatResult combat(Monster monster){
+    public CombatResult combat(Monster monster){
         
     }
     
-    void applyBadConsequence(BadConsequence badConsequence){
+    public void applyBadConsequence(BadConsequence badConsequence){
         
     }
     
-    boolean makeVisibleTreasure(Treasure treasure){
+    public boolean makeVisibleTreasure(Treasure treasure){
         
     }
     
-    boolean canMakeTreasureVisible(Treasure treasure){
+    public boolean canMakeTreasureVisible(Treasure treasure){
         
     }
     
-    void DiscardVisibleTreasure(Treasure treasure){
+    public void DiscardVisibleTreasure(Treasure treasure){
         
     }
     
-    void DiscardHiddenTreasure(Treasure treasure){
+    public void DiscardHiddenTreasure(Treasure treasure){
         
     }
     
-    boolean buyLevels(ArrayList<Treasure> hiddenTreasures, ArrayList<Treasure> visibleTreasures){
+    public boolean buyLevels(ArrayList<Treasure> hiddenTreasures, ArrayList<Treasure> visibleTreasures){
         
     }
     
-    int getCombatLevel(){
+    public int getCombatLevel(){
         
     }
     
-    boolean validState(){
+    public boolean validState(){
         return this.pendingBadConsequence == null &&
                 this.hiddenTreasures.size() <= MAXHIDDENTREASURES;
     }
     
-    boolean initTreasures(){
+    public boolean initTreasures(){
         
     }
     
-    boolean isDead(){
+    public boolean isDead(){
         return this.dead;
     }
     
-    boolean hasVisibleTreasures(){
-        return not this.visibleTreasures.isEmpty();
+    public boolean hasVisibleTreasures(){
+        return !this.visibleTreasures.isEmpty();
     }
     
-    Player(String name){
+    public Player(String name){
         this.name = name;
+        this.level = 1;
+        this.dead = true;
     }
     
-    ArrayList<Treasure> getVisibleTreasures(){
+    public ArrayList<Treasure> getVisibleTreasures(){
         return this.visibleTreasures;
     }
     
-    ArrayList<Treasure> getHiddenTreasures(){
+    public ArrayList<Treasure> getHiddenTreasures(){
         return this.hiddenTreasures;
     }
 }

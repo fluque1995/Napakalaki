@@ -7,30 +7,49 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
- * Clase principal del juego Napakalaki. Gestiona la ejecución
- * del juego
+ * Clase principal del juego Napakalaki. Gestiona la ejecución del juego, manteniendo
+ * la información relativa a los jugadores y al progreso del mismo.
  * @author Francisco Luque y Antonio Moya
  */
 public class Napakalaki {
 
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                                Instance                                //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
     private static Napakalaki instance = null;
     
-    Monster currentMonster;
-    ArrayList<Player> players;
-    Player currentPlayer;
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                               Attributes                               //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
+    private Monster currentMonster;
+    private ArrayList<Player> players;
+    private Player currentPlayer;
+    private int currentPlayerIndex = -1;
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                     Constructor and instance getter                    //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
     
     private Napakalaki(){}
     
-    private void initPlayers(ArrayList<String> names){
-        
-    }
-    
-    private Player nextPlayer(){
-        
-    }
-    
+    /**
+     * Getter de la instancia del juego. Esta clase es una clase singleton, así
+     * que no se permite la creación de objetos mediante el constructor. Se permite
+     * la obtención de la instancia creada usando este método. Si la instancia no
+     * existe, el método la crea y la devuelve, si no, devuelve la ya existente.
+     * @return Instancia del juego
+     */
     public static Napakalaki getInstance(){
         if (instance == null){
             instance = new Napakalaki();
@@ -39,111 +58,135 @@ public class Napakalaki {
         return instance;
     }
     
-    CombatResult combat(){
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                             Private methods                            //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
+    private void initPlayers(ArrayList<String> names){
+        
+        this.players = new ArrayList();
+        for (String name: names){
+            this.players.add(new Player(name));
+        }
+    }
+    
+    private Player nextPlayer(){
+        if (this.currentPlayerIndex == -1){
+            Random rnd = new Random();
+            this.currentPlayerIndex = rnd.nextInt(this.players.size());
+        } 
+        else 
+        {
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.size();
+        }
+        currentPlayer = this.players.get(this.currentPlayerIndex);
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                             Public methods                             //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * Simula el combate entre el monstruo y el jugador actual. Obtiene el resultado
+     * del combate dependiendo del estado del monstruo actual y el jugador actual,
+     * de acuerdo con las reglas del juego
+     * @return Resultado del combate
+     */
+    public CombatResult combat(){
         
     }
     
-    void discardVisibleTreasure(Treasure treasure){
+    public void discardVisibleTreasure(Treasure treasure){
         
     }
     
-    void discardHiddenTreasures(Treasure treasure){
+    public void discardHiddenTreasures(Treasure treasure){
         
     }
     
-    boolean makeTreasureVisible(Treasure treasure){
+    public boolean makeTreasureVisible(Treasure treasure){
         
     }
     
-    boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
+    public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
         
     }
     
-    void initGame(ArrayList<String> players){
+    /**
+     * Inicializa el juego. Establece los jugadores a partir de array de nombres
+     * que se pasa como argumento, inicializa los mazos de cartas y decide los 
+     * turnos de juego.
+     * @param players Array de nombres de los jugadores que van a participar en
+     * el juego.
+     */
+    public void initGame(ArrayList<String> players){
         
     }
     
-    Player getCurrentPlayer(){
+    /**
+     * Getter para el jugador que tiene el turno.
+     * @return Objeto de la clase {@link Player} que representa al jugador en cuestión
+     */
+    public Player getCurrentPlayer(){
         return this.currentPlayer;
     }
     
-    Monster getCurrentMonster(){
+    /**
+     * Getter para el monstruo actual.
+     * @return Objeto de la clase {@link Monster} que representa a dicho monstruo
+     */
+    public Monster getCurrentMonster(){
         return this.currentMonster;
     }
     
-    boolean canMakeVisibleTreasure(){
+    public boolean canMakeVisibleTreasure(Treasure treasure){
         
     }
     
-    ArrayList<Treasure> getVisibleTreasures(){
+    public ArrayList<Treasure> getVisibleTreasures(){
         
     }
     
-    ArrayList<Treasure> getHiddenTreasures(){
+    public ArrayList<Treasure> getHiddenTreasures(){
         
     }
     
-    boolean nextTurn(){
+    public boolean nextTurn(){
         
     }
     
-    boolean newtTurnAllowed(){
-        
+    /**
+     * Método que establece si el jugador que está jugando en ese momento tiene
+     * permitido terminar su turno. Esto significa que esté en un estado válido
+     * para terminar su turno. Utiliza como apoyo el método validState() de la 
+     * clase {@link Player}
+     * @return True si se puede terminar el turno y false en caso contrario
+     * @see Player#validState() 
+     */
+    public boolean newtTurnAllowed(){
+        return this.currentPlayer.validState();
     }
     
-    boolean endOfGame(CombatResult result){
-        
+    /**
+     * Método que establece si se termina el juego, de acuerdo con el resultado
+     * del último combate. Dirá si con el resultado del último combate el jugador
+     * actual gana el juego, de acuerdo con las reglas del juego
+     * @param result Resultado del último combate, que determinará si el juego 
+     * termina
+     * @return True si termina el juego, false en caso contrario 
+     */
+    public boolean endOfGame(CombatResult result){
+        return result == CombatResult.WINANDWINGAME;
     }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        
-        /*
-        * Creating consults for some parameters.
-        */
-        
-        System.out.println("Monstruos con nivel mayor que 10:");
-        for (Monster m: monsters){
-            if (m.getCombatLevel() > 10){
-               System.out.println(m.toString());
-            }
-        }
-        
-        System.out.println("Monstruos cuyo mal rollo implica sólo pérdida de niveles:");
-        for (Monster m: monsters){
-            if (m.getBadConsequence().getNVisibleTreasures() == 0 && 
-                m.getBadConsequence().getNHiddenTreasures() == 0 && 
-                m.getBadConsequence().kills() == false && 
-                m.getBadConsequence().getSpecificVisibleTreasures().isEmpty() && 
-                m.getBadConsequence().getSpecificHiddenTreasures().isEmpty()){
-                System.out.println(m.toString());
-            }
-        }
-        
-        System.out.println("Monstruos que te aumentan más de un nivel:");
-        for (Monster m: monsters){
-            if (m.getPrize().getLevels() > 1){
-                System.out.println(m.toString());
-            }
-        }
-        
-        System.out.println("Monstruos que te hacen perder armas de una mano:");
-        for (Monster m: monsters) {
-   
-            ArrayList<TreasureKind> specificTreasures = new ArrayList<>();
-            
-            specificTreasures.addAll(m.getBadConsequence().getSpecificVisibleTreasures());
-            specificTreasures.addAll(m.getBadConsequence().getSpecificHiddenTreasures());
-
-            for (TreasureKind treasure: specificTreasures) {
-                if (treasure == TreasureKind.ONEHAND){
-                    System.out.println(m.toString());
-                    break;
-                }
-            }
-        }
     }
     
 }

@@ -11,15 +11,41 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- *
+ * Clase que permite el manejo de las cartas que se utilizan en el juego. Trabaja
+ * con dos mazos de cartas principalmente. Por un lado, maneja un mazo de cartas 
+ * de tipo {@link Monster}, que representan los monstruos contra los que puedes
+ * combatir en el juego, y un mazo de cartas de tipo {@link Treasure}, que representan
+ * los tesoros que puedes recibir al ganar los combates, y que puedes equiparte.
  * @author paco
  */
 public class CardDealer {
     
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                                Instance                                //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+
     private static CardDealer instance = null;
-    ArrayList<Treasure> unusedTreasures, usedTreasures;
-    ArrayList<Monster> unusedMonsters, usedMonsters;
     
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                               Attributes                               //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
+    private ArrayList<Treasure> unusedTreasures, usedTreasures;
+    private ArrayList<Monster> unusedMonsters, usedMonsters;
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //             Constructor, Instance getter and initializator             //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Constructor
+     */
     private CardDealer(){
         this.unusedMonsters = new ArrayList();
         this.usedMonsters = new ArrayList();
@@ -27,42 +53,95 @@ public class CardDealer {
         this.usedTreasures = new ArrayList();
     }
     
-    void shuffleTreasures(){
-        Collections.shuffle(this.unusedTreasures, new Random());
-    }
-    
-    void shuffleMonsters(){
-        Collections.shuffle(this.unusedMonsters, new Random());
-    }
-    
-    CardDealer getInstance(){
+    /**
+     * Getter de la instancia del CardDealer. Esta es una clase singleton, así 
+     * que no se permite la creación de objetos a partir del constructor. Este
+     * Método crea una instancia de la clase si ésta no ha sido ya creada, y si
+     * ya existe, la devuelve.
+     * @return Instancia, ya creada e inicializada, de la clase
+     */
+    public CardDealer getInstance(){
         if(instance == null){
             instance = new CardDealer();
         }
         return instance;
     }
     
-    Treasure nextTreasure(){
+    /**
+     * Método que inicializa los mazos de cartas. Prepara el CardDealer para que
+     * pueda trabajar con los dos mazos de cartas que tiene disponibles.
+     */
+    public void initCards(){
         
     }
     
-    Monster nextMonster(){
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                                Methods                                 //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////    
+    
+    /**
+     * Monster deck shuffler
+     */
+    private void shuffleTreasures(){
+        Collections.shuffle(this.unusedTreasures, new Random());
+    }
+    
+    /**
+     * Monster deck shuffler
+     */
+    private void shuffleMonsters(){
+        Collections.shuffle(this.unusedMonsters, new Random());
+    }
+    
+    /**
+     * Método que devuelve el siguiente tesoro que hay en el mazo de tesoros sin
+     * utilizar.
+     * @return Tesoro siguiente
+     */
+    public Treasure nextTreasure(){
         
     }
     
-    void giveTreasureBack(Treasure treasure){
+    /**
+     * Método que devuelve el siguiente monstruo que hay en el mazo de monstruos
+     * que no se han utilizado.
+     * @return Monstruo siguiente
+     */
+    public Monster nextMonster(){
+        
+    }
+    
+    /**
+     * Método que introduce en el montón de tesoros de descarte el tesoro que se 
+     * pasa como argumento.
+     * @param treasure Tesoro que se quiere introducir en el mazo de descartes
+     */
+    public void giveTreasureBack(Treasure treasure){
         this.usedTreasures.add(treasure);
     }
     
-    void giveMonsterBack(Monster monster){
+    /**
+     * Método que introduce en el montón de monstruos de descarte el monstruo que
+     * se pasa como argumento.
+     * @param monster Monstruo que se quiere introducir en el mazo de descartes 
+     * de monstruos
+     */
+    public void giveMonsterBack(Monster monster){
         this.usedMonsters.add(monster);
     }
     
-    void initCards(){
-        
-    }
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                              Decks setup                               //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////    
     
-    void initTreasureCardDeck(){
+    /*
+    * Treasure deck setup
+    */
+    private void initTreasureCardDeck(){
          
         this.unusedTreasures.add(new Treasure("¡Sí mi amo!", 0, 4, 7, TreasureKind.HELMET));
         this.unusedTreasures.add(new Treasure("Botas de investigación", 600, 3, 4, TreasureKind.SHOE));
@@ -99,7 +178,10 @@ public class CardDealer {
         
     }
     
-    void initMonsterCardDeck(){
+    /*
+    * Monster deck setup
+    */
+    private void initMonsterCardDeck(){
         
         Prize prize = new Prize(2,1);      
         BadConsequence badConsequence = new BadConsequence("Pierdes tu armadura visible y otra oculta",
