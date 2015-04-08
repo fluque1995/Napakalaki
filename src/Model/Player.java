@@ -188,7 +188,26 @@ public class Player {
      * @return Nivel total de combate del jugador
      */
     public int getCombatLevel(){
+        int combatLevel = this.level;
+        boolean hasNecklace = false;
         
+        for (Treasure t: this.visibleTreasures){
+            if (t.getType() == TreasureKind.NECKLACE){
+                hasNecklace = true;
+            }
+        }
+        
+        if(hasNecklace){
+            for (Treasure t: this.visibleTreasures){
+                combatLevel += t.getMaxBonus();
+            }
+        } else {
+            for (Treasure t: this.visibleTreasures){
+                combatLevel += t.getMinBonus();
+            }
+        }
+        
+        return combatLevel;
     }
     
     /**
