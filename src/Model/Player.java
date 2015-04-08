@@ -38,7 +38,7 @@ public class Player {
     /**
      * Revive the player
      */
-    private void bringToLive(){
+    private void bringToLife(){
         this.dead = false;
     }
     
