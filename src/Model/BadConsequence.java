@@ -20,6 +20,12 @@ import java.util.ArrayList;
  */
 public class BadConsequence {
     
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                               Attributes                               //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
     private String text;
     private int levels;
     private int nVisibleTreasures;
@@ -28,6 +34,12 @@ public class BadConsequence {
     
     private ArrayList<TreasureKind> specificVisibleTreasures;
     private ArrayList<TreasureKind> specificHiddenTreasures;
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                              Constructors                              //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
     
     /**
      * Constructor de BadConsequence para el tipo de mal rollo en el que se 
@@ -45,8 +57,7 @@ public class BadConsequence {
         this.nHiddenTreasures = nHidden;
         this.death = false;
         this.specificVisibleTreasures = new ArrayList();
-        this.specificHiddenTreasures = new ArrayList();
-        
+        this.specificHiddenTreasures = new ArrayList();     
     }
     
     /**
@@ -86,6 +97,12 @@ public class BadConsequence {
         this.specificHiddenTreasures = tHidden;    
     }
     
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                  Getters, setters and consult methods                  //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
+    
     /**
      * Comprueba si el mal rollo está vacío.
      * @return Boolean que indica si el mal rollo está vacío
@@ -97,8 +114,8 @@ public class BadConsequence {
     }
     
     /**
-     * Getter para el boolean que indica si el monstruo te mata
-     * @return Valor del boolean
+     * Getter para el boolean que indica si el monstruo te mata.
+     * @return True si el monstruo te mata, false si no
      */
     public boolean kills(){
         return this.death;
@@ -151,6 +168,12 @@ public class BadConsequence {
     public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
         return this.specificHiddenTreasures;
     }
+
+    ////////////////////////////////////////////////////////////////////////////
+    //                                                                        //
+    //                             Other methods                              //
+    //                                                                        //    
+    ////////////////////////////////////////////////////////////////////////////
     
     public void substractVisibleTreasure(Treasure treasure){
         

@@ -6,7 +6,9 @@
 package Model;
 
 /**
- * Enumerado que contiene información relativa al resultado de un combate
+ * Enumerado que contiene información relativa al resultado de un combate. Sirve
+ * para conocer el resultado de un combate entre un {@link Player} y un {@link Monster},
+ * y tomar la decisión que se deba en cada caso. 
  * @author paco
  */
 public enum CombatResult {
