@@ -51,6 +51,8 @@ public class CardDealer {
         this.usedMonsters = new ArrayList();
         this.unusedTreasures = new ArrayList();
         this.usedTreasures = new ArrayList();
+        
+        this.initCards();
     }
     
     /**
@@ -60,7 +62,7 @@ public class CardDealer {
      * ya existe, la devuelve.
      * @return Instancia, ya creada e inicializada, de la clase
      */
-    public CardDealer getInstance(){
+    public static CardDealer getInstance(){
         if(instance == null){
             instance = new CardDealer();
         }
@@ -73,6 +75,10 @@ public class CardDealer {
      */
     public void initCards(){
         
+        this.initMonsterCardDeck();
+        this.shuffleMonsters();
+        this.initTreasureCardDeck();
+        this.shuffleTreasures();
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -132,6 +138,26 @@ public class CardDealer {
         this.usedMonsters.add(monster);
     }
     
+    /**
+     * Método que imprime por pantalla la baraja de cartas de monstruos. Se usa 
+     * para trazar errores.
+     */
+    public void printMonsters(){
+        for (Monster m: this.unusedMonsters){
+            System.out.println(m.toString());
+        }
+    }
+    
+    /**
+     * Método que imprime por pantalla la baraja de cartas de tesoros. Se usa 
+     * para trazar errores.
+     */
+    public void printTreasures(){
+        for (Treasure t: this.unusedTreasures){
+            System.out.println(t.toString());
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
     //                              Decks setup                               //

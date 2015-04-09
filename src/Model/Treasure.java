@@ -89,4 +89,14 @@ public class Treasure {
     public TreasureKind getType(){
         return this.type;
     }
+    
+    /**
+     * Método que devuelve en un string toda la información relativa al tesoro.
+     * Se usa para trazar errores.
+     */
+    public String toString(){
+        return "Nombre: " + this.name + ", precio: " + Integer.toString(goldCoins) +
+                ", bonus mínimo: " + Integer.toString(minBonus) + ", bonus "
+                + "máximo: " + Integer.toString(maxBonus) + ", tipo: " + type.name();
+    }
 }
