@@ -127,7 +127,7 @@ public class Player {
         for (Treasure t: treasures){
             totalLevels += t.getGoldCoins();
         }
-        return totalLevels/1000;
+        return totalLevels/(float)1000;
     }
     
     public void applyPrize(Prize prize){
@@ -154,19 +154,34 @@ public class Player {
      */
     public boolean canMakeTreasureVisible(Treasure treasure){
         TreasureKind treasureType = treasure.getType();
-        int count = 0;
-        for (Treasure t: this.visibleTreasures){
-            if (t.getType() == treasureType){
-                count+=1;
+        boolean allowed = true;
+        
+        if(treasureType == TreasureKind.BOTHHANDS){
+            for(Treasure t: this.visibleTreasures){
+                if(t.getType() == TreasureKind.BOTHHANDS || t.getType() == TreasureKind.ONEHAND){
+                    allowed = false;
+                }
+            }
+        } else if(treasureType == TreasureKind.ONEHAND && allowed){
+            int count = 0;
+            for(Treasure t: this.visibleTreasures){
+                if(t.getType() == TreasureKind.ONEHAND){
+                    count += 1;
+                }
+                
+                if(t.getType() == TreasureKind.BOTHHANDS || (t.getType() == TreasureKind.ONEHAND && count > 1)){
+                    allowed = false;
+                }
+            }
+            
+        } else if (allowed){
+            for (Treasure t: this.visibleTreasures){
+                if(t.getType() == treasureType){
+                    allowed = false;
+                }
             }
         }
-        if (count < 1 || (count < 2 && treasureType == TreasureKind.ONEHAND)){
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return allowed;
     }
     
     public void DiscardVisibleTreasure(Treasure treasure){
