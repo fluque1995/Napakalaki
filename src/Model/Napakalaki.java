@@ -182,11 +182,4 @@ public class Napakalaki {
     public boolean endOfGame(CombatResult result){
         return result == CombatResult.WINANDWINGAME;
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
-    
 }
