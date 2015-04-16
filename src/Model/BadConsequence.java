@@ -108,9 +108,10 @@ public class BadConsequence {
      * @return Boolean que indica si el mal rollo está vacío
      */
     public boolean isEmpty(){
-        return this.text.isEmpty() && this.levels == 0 && this.nVisibleTreasures == 0 &&
-                this.nHiddenTreasures == 0 && death == false && this.specificVisibleTreasures == null &&
-                this.specificHiddenTreasures == null;
+        return this.levels == 0 && this.nVisibleTreasures == 0 && 
+                this.nHiddenTreasures == 0 && this.death == false && 
+                (this.specificVisibleTreasures == null || this.specificVisibleTreasures.isEmpty()) &&
+                (this.specificHiddenTreasures == null || this.specificHiddenTreasures.isEmpty());
     }
     
     /**
@@ -176,11 +177,17 @@ public class BadConsequence {
     ////////////////////////////////////////////////////////////////////////////
     
     public void substractVisibleTreasure(Treasure treasure){
-        
+       for(TreasureKind t: this.specificVisibleTreasures){
+           if(t == treasure.getType())
+               this.specificVisibleTreasures.remove(t);
+       }
     }
     
     public void substractHiddenTreasure(Treasure treasure){
-        
+        for(TreasureKind t: this.specificHiddenTreasures){
+           if(t == treasure.getType())
+               this.specificHiddenTreasures.remove(t);
+       }
     }
     
     public BadConsequence adjustToFitTreasureList(ArrayList<Treasure> h, ArrayList<Treasure> v){
