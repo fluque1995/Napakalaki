@@ -82,6 +82,8 @@ public class Napakalaki {
             this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.size();
         }
         currentPlayer = this.players.get(this.currentPlayerIndex);
+        
+        return currentPlayer;
     }
     
     ////////////////////////////////////////////////////////////////////////////
