@@ -165,7 +165,8 @@ public class Napakalaki {
     }
     
     public boolean nextTurn(){
-        if(this.nextTurnAllowed()){
+        boolean siguiente = this.nextTurnAllowed();
+        if(siguiente){
             CardDealer dealer = CardDealer.getInstance();
             this.nextPlayer();
             this.currentMonster = dealer.nextMonster();
@@ -174,7 +175,8 @@ public class Napakalaki {
             }
             
         }
-            
+        
+        return siguiente;
     }
     
     /**

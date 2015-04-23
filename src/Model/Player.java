@@ -76,9 +76,20 @@ public class Player {
      * The player dies
      */
     private void die(){
+        CardDealer dealer = CardDealer.getInstance();
+        for(Treasure treasure: this.visibleTreasures){
+            dealer.giveTreasureBack(treasure);
+        }
+        
+        this.visibleTreasures.clear();
+        
+        for(Treasure treasure: this.hiddenTreasures){
+            dealer.giveTreasureBack(treasure);
+        }
+        
+        this.hiddenTreasures.clear();
         this.dead = true;
     }
-    
     /**
      * Make the player discard necklace. 
      */
@@ -136,6 +147,15 @@ public class Player {
     }
     
     public void applyPrize(Prize prize){
+        int nLevels = prize.getLevels();
+        this.incrementLevels(nLevels);
+        int nPrize = prize.getTreasures();
+        CardDealer dealer = CardDealer.getInstance();
+        
+        for(int i=0; i<nPrize; i++){
+            Treasure treasure = dealer.nextTreasure();
+            this.hiddenTreasures.add(treasure);
+        }
         
     }
     
@@ -179,6 +199,12 @@ public class Player {
     }
     
     public void applyBadConsequence(BadConsequence badConsequence){
+        int nLevels = badConsequence.getLevels();
+        this.decrementLevels(nLevels);
+        BadConsequence pendingBad = 
+                badConsequence.adjustToFitTreasureList(visibleTreasures, hiddenTreasures);
+        
+        this.setPendingBadConsequence(pendingBad);
         
     }
     
@@ -306,7 +332,28 @@ public class Player {
                 this.hiddenTreasures.size() <= MAXHIDDENTREASURES;
     }
     
-    public boolean initTreasures(){
+    public void initTreasures(){
+        this.bringToLife();
+        Dice dice = Dice.getInstance();
+        int number = dice.nextNumber();
+        CardDealer dealer = CardDealer.getInstance();
+        if(number == 1){
+            Treasure treasure = dealer.nextTreasure();
+            this.hiddenTreasures.add(treasure);
+        }
+        else if(number < 6){
+            for(int i=0; i<2; i++){
+                Treasure treasure = dealer.nextTreasure();
+                this.hiddenTreasures.add(treasure);
+            }
+        }
+        else{
+            for(int i=0; i<3; i++){
+                Treasure treasure = dealer.nextTreasure();
+                this.hiddenTreasures.add(treasure);
+            }
+        }
+        
         
     }
     
