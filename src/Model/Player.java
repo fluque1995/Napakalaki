@@ -140,7 +140,42 @@ public class Player {
     }
     
     public CombatResult combat(Monster monster){
-        
+        CombatResult combatResult;
+        int myLevel = this.getCombatLevel();
+        int levelMonster = monster.getLevel();
+        if(myLevel > levelMonster){
+           Prize prize = monster.getPrize();
+           this.applyPrize(prize);
+           if(this.level < 10)
+               combatResult = CombatResult.WIN;
+           else{
+               combatResult = CombatResult.WINANDWINGAME;
+           }
+        }
+        else{
+            Dice dice = Dice.getInstance();
+            int escape = dice.nextNumber();
+            
+            if(escape < 5){
+                BadConsequence bad = monster.getBadConsequence();
+                boolean amIDead = bad.kills();
+                
+                if(amIDead == true){
+                    this.die();
+                    combatResult = CombatResult.LOSEANDDIE;
+                }
+                else{
+                    this.applyBadConsequence(bad);
+                    combatResult = CombatResult.LOSE;
+                }
+            }
+            
+            else{
+                combatResult = CombatResult.LOSEANDESCAPE;
+            }
+        }
+        this.discardNecklaceIfVisible();
+        return combatResult;
     }
     
     public void applyBadConsequence(BadConsequence badConsequence){
@@ -201,7 +236,13 @@ public class Player {
     }
     
     public void discardHiddenTreasure(Treasure treasure){
-        
+        this.hiddenTreasures.remove(treasure);
+        if((this.pendingBadConsequence != null) && (!this.pendingBadConsequence.isEmpty())){
+            this.pendingBadConsequence.substractHiddenTreasure(treasure);
+        }
+        CardDealer dealer = CardDealer.getInstance();
+        dealer.giveTreasureBack(treasure);
+        this.dieIfNoTreasures();
     }
     
     public boolean buyLevels(ArrayList<Treasure> hiddenTreasures, ArrayList<Treasure> visibleTreasures){

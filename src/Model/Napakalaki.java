@@ -99,15 +99,15 @@ public class Napakalaki {
      * @return Resultado del combate
      */
     public CombatResult combat(){
-        
+        return this.currentPlayer.combat(currentMonster);
     }
     
     public void discardVisibleTreasure(Treasure treasure){
         this.currentPlayer.discardVisibleTreasure(treasure);
     }
     
-    public void discardHiddenTreasures(Treasure treasure){
-        
+    public void discardHiddenTreasure(Treasure treasure){
+        this.currentPlayer.discardHiddenTreasure(treasure);
     }
     
     public boolean makeTreasureVisible(Treasure treasure){
