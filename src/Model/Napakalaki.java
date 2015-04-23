@@ -111,7 +111,11 @@ public class Napakalaki {
     }
     
     public boolean makeTreasureVisible(Treasure treasure){
-        
+        boolean canI = this.canMakeVisibleTreasure(treasure);
+        if(canI){
+            this.currentPlayer.makeVisibleTreasure(treasure);
+        }
+        return canI;
     }
     
     public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
@@ -149,7 +153,7 @@ public class Napakalaki {
     }
     
     public boolean canMakeVisibleTreasure(Treasure treasure){
-        
+        return this.currentPlayer.canMakeTreasureVisible(treasure);
     }
    
     public ArrayList<Treasure> getVisibleTreasures(){

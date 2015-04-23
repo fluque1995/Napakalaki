@@ -183,7 +183,12 @@ public class Player {
     }
     
     public boolean makeVisibleTreasure(Treasure treasure){
-        
+        boolean canI = this.canMakeTreasureVisible(treasure);
+        if(canI){
+            this.visibleTreasures.add(treasure);
+            this.hiddenTreasures.remove(treasure);
+        }
+        return canI;
     }
     
     /**
