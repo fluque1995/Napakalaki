@@ -83,11 +83,16 @@ public class Player {
      * Make the player discard necklace. 
      */
     private void discardNecklaceIfVisible(){
+        CardDealer cardDealer = CardDealer.getInstance();
         for (Treasure t: this.visibleTreasures){
             if (t.getType() == TreasureKind.NECKLACE){
+                cardDealer.giveTreasureBack(t);
                 this.visibleTreasures.remove(t);
             }
         }
+        
+        
+      
     }
     
     /**

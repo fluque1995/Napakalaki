@@ -5,6 +5,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author paco
@@ -17,32 +20,18 @@ public class Test {
     public static void main(String[] args) {
         
         ////////////////////////////////////////////////////////////////////////
-        //                         Testing card dealer                        //
-        ////////////////////////////////////////////////////////////////////////
-        
-        System.out.println("Inicializando el mazo de cartas...");
-        
-        CardDealer cardDealer = CardDealer.getInstance();
-        
-        System.out.println("Cartas en el mazo de cartas de monstruos:\n");
-
-        cardDealer.printMonsters();
-        
-        System.out.println("\nCartas en el mazo de cartas de tesoros:\n");
-        
-        cardDealer.printTreasures();
-
-        ////////////////////////////////////////////////////////////////////////
-        //                            Testing dice                            //
-        ////////////////////////////////////////////////////////////////////////
-        
-        System.out.println("Cinco tiradas del dado:");
-        
-        Dice dice = Dice.getInstance();
-        for (int i = 0; i < 5; ++i){
-            System.out.println(dice.nextNumber());
-        }
-        
+       Prize prize = new Prize(2,1);      
+       BadConsequence badConsequence = new BadConsequence("Pierdes tu armadura visible y otra oculta",
+                        0, 0, 0);
+       
+       
+       Treasure t = new Treasure("¡Sí mi amo!", 0, 4, 7, TreasureKind.ARMOR);
+       
+       System.out.println(badConsequence.toString());
+       
+       badConsequence.substractVisibleTreasure(t);
+       
+       System.out.println(badConsequence.toString());
     }
     
 }

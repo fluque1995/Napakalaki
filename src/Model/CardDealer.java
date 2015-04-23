@@ -107,7 +107,14 @@ public class CardDealer {
      * @return Tesoro siguiente
      */
     public Treasure nextTreasure(){
-        
+        Treasure t = unusedTreasures.get(0);
+        unusedTreasures.remove(0);
+        if(unusedTreasures.isEmpty()){
+            unusedTreasures = usedTreasures;
+            usedTreasures = new ArrayList();
+            this.shuffleTreasures();
+        }
+        return t;
     }
     
     /**
@@ -116,7 +123,14 @@ public class CardDealer {
      * @return Monstruo siguiente
      */
     public Monster nextMonster(){
-        
+        Monster m = unusedMonsters.get(0);
+        unusedMonsters.remove(0);
+        if(unusedMonsters.isEmpty()){
+            unusedMonsters = usedMonsters;
+            usedMonsters = new ArrayList();
+            this.shuffleMonsters();
+        }
+        return m;
     }
     
     /**

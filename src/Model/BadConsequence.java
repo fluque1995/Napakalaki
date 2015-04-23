@@ -177,16 +177,30 @@ public class BadConsequence {
     ////////////////////////////////////////////////////////////////////////////
     
     public void substractVisibleTreasure(Treasure treasure){
-       for(TreasureKind t: this.specificVisibleTreasures){
-           if(t == treasure.getType())
-               this.specificVisibleTreasures.remove(t);
+       if(nVisibleTreasures > 0)
+           nVisibleTreasures -= 1;
+       else{
+         boolean encontrado = false;  
+         for(TreasureKind t: this.specificVisibleTreasures){
+            if(t == treasure.getType() && !encontrado){
+                this.specificVisibleTreasures.remove(t);
+                encontrado = true;
+            }
+         }
        }
     }
     
     public void substractHiddenTreasure(Treasure treasure){
-        for(TreasureKind t: this.specificHiddenTreasures){
-           if(t == treasure.getType())
-               this.specificHiddenTreasures.remove(t);
+        if(nHiddenTreasures > 0)
+           nHiddenTreasures -= 1;
+       else{
+         boolean encontrado = false;  
+         for(TreasureKind t: this.specificHiddenTreasures){
+            if(t == treasure.getType() && !encontrado && t != null){
+                this.specificHiddenTreasures.remove(t);
+                encontrado = true;
+            }
+         }
        }
     }
     
@@ -223,3 +237,5 @@ public class BadConsequence {
         return printable;
     }
 }
+
+

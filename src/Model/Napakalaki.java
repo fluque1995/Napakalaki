@@ -126,7 +126,9 @@ public class Napakalaki {
      * el juego.
      */
     public void initGame(ArrayList<String> players){
-        
+        CardDealer dealer = CardDealer.getInstance();
+        dealer.initCards();
+        this.initPlayers(players);
     }
     
     /**
@@ -148,7 +150,7 @@ public class Napakalaki {
     public boolean canMakeVisibleTreasure(Treasure treasure){
         
     }
-    
+   
     public ArrayList<Treasure> getVisibleTreasures(){
         
     }
