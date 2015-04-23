@@ -189,11 +189,18 @@ public class Player {
         return allowed;
     }
     
-    public void DiscardVisibleTreasure(Treasure treasure){
+    public void discardVisibleTreasure(Treasure treasure){
+        this.visibleTreasures.remove(treasure);
+        if((this.pendingBadConsequence != null) && (!this.pendingBadConsequence.isEmpty())){
+            this.pendingBadConsequence.substractVisibleTreasure(treasure);
+        }
+        CardDealer dealer = CardDealer.getInstance();
+        dealer.giveTreasureBack(treasure);
+        this.dieIfNoTreasures();
         
     }
     
-    public void DiscardHiddenTreasure(Treasure treasure){
+    public void discardHiddenTreasure(Treasure treasure){
         
     }
     

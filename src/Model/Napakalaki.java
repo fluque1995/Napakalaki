@@ -103,7 +103,7 @@ public class Napakalaki {
     }
     
     public void discardVisibleTreasure(Treasure treasure){
-        
+        this.currentPlayer.discardVisibleTreasure(treasure);
     }
     
     public void discardHiddenTreasures(Treasure treasure){
@@ -129,6 +129,7 @@ public class Napakalaki {
         CardDealer dealer = CardDealer.getInstance();
         dealer.initCards();
         this.initPlayers(players);
+        this.nextTurn();
     }
     
     /**
@@ -160,7 +161,16 @@ public class Napakalaki {
     }
     
     public boolean nextTurn(){
-        
+        if(this.nextTurnAllowed()){
+            CardDealer dealer = CardDealer.getInstance();
+            this.nextPlayer();
+            this.currentMonster = dealer.nextMonster();
+            if(currentPlayer.isDead()){
+                currentPlayer.initTreasures();
+            }
+            
+        }
+            
     }
     
     /**
@@ -171,7 +181,7 @@ public class Napakalaki {
      * @return True si se puede terminar el turno y false en caso contrario
      * @see Player#validState() 
      */
-    public boolean newtTurnAllowed(){
+    public boolean nextTurnAllowed(){
         return this.currentPlayer.validState();
     }
     
