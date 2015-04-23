@@ -115,7 +115,7 @@ public class Napakalaki {
     }
     
     public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
-        
+        return currentPlayer.buyLevels(visibleTreasures, hiddenTreasures);
     }
     
     /**

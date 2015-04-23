@@ -245,8 +245,21 @@ public class Player {
         this.dieIfNoTreasures();
     }
     
-    public boolean buyLevels(ArrayList<Treasure> hiddenTreasures, ArrayList<Treasure> visibleTreasures){
+    public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
+        float levels = this.computeGoldCoinsValue(visibleTreasures);
+        levels += this.computeGoldCoinsValue(hiddenTreasures);
+        boolean canI = this.canIBuyLevels((int) levels);
+        if(canI){
+            this.incrementLevels((int) levels);
+            for(Treasure treasure: visibleTreasures){
+                this.discardVisibleTreasure(treasure);
+            }
+            for(Treasure treasure: hiddenTreasures){
+                this.discardHiddenTreasure(treasure);
+            }
+        }
         
+        return canI;
     }
     
     /**
