@@ -399,4 +399,8 @@ public class Player {
     public ArrayList<Treasure> getHiddenTreasures(){
         return this.hiddenTreasures;
     }
+    
+    public String getName(){
+        return this.name;
+    }
 }
