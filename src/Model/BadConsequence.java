@@ -204,7 +204,69 @@ public class BadConsequence {
        }
     }
     
-    public BadConsequence adjustToFitTreasureList(ArrayList<Treasure> h, ArrayList<Treasure> v){
+    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
+            ArrayList<Treasure> hidden){
+       
+        
+        if(!death){
+            
+            if(this.nVisibleTreasures > 0 || this.nHiddenTreasures > 0){
+                if(this.nVisibleTreasures > visible.size()){
+                    this.nVisibleTreasures = visible.size();
+                }
+                
+                if(this.nHiddenTreasures > hidden.size()){
+                    this.nHiddenTreasures = hidden.size();
+                }
+            }
+            else{
+
+                ArrayList<TreasureKind> treasure_visible_types = new ArrayList();
+                ArrayList<TreasureKind> treasure_hidden_types = new ArrayList();
+                
+                for(Treasure treasure: hidden){
+                    treasure_hidden_types.add(treasure.getType());
+                }
+
+                for(int i=0; i<this.specificHiddenTreasures.size(); i++){
+                    boolean encontrado = false;
+                    for(int j=0; j<treasure_hidden_types.size() && !encontrado; j++){
+                        if(this.specificHiddenTreasures.get(i) == treasure_hidden_types.get(j)){
+                            treasure_hidden_types.remove(treasure_hidden_types.get(j));
+                            encontrado = true;
+                        }
+                    }
+                    if(!encontrado){
+                        this.specificHiddenTreasures.remove(this.specificHiddenTreasures.get(i));
+                        i--;
+                    }
+                }                
+            
+
+                for(Treasure treasure: visible){
+                    treasure_visible_types.add(treasure.getType());
+                }
+
+                for(int i=0; i<this.specificVisibleTreasures.size(); i++){
+                    boolean encontrado = false;
+                    for(int j=0; j<treasure_visible_types.size() && !encontrado; j++){
+                        if(this.specificVisibleTreasures.get(i) == treasure_visible_types.get(j)){
+                            treasure_visible_types.remove(treasure_visible_types.get(j));
+                            encontrado = true;
+                        }
+                    }
+                    if(!encontrado){
+                        this.specificVisibleTreasures.remove(this.specificVisibleTreasures.get(i));
+                        i--;
+                    }
+                }
+            }
+        }
+        
+        
+        return this;
+        
+        
         
     }
     

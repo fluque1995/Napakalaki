@@ -202,7 +202,7 @@ public class Player {
         int nLevels = badConsequence.getLevels();
         this.decrementLevels(nLevels);
         BadConsequence pendingBad = 
-                badConsequence.adjustToFitTreasureList(visibleTreasures, hiddenTreasures);
+                badConsequence.adjustToFitTreasureLists(visibleTreasures, hiddenTreasures);
         
         this.setPendingBadConsequence(pendingBad);
         

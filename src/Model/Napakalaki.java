@@ -157,11 +157,11 @@ public class Napakalaki {
     }
    
     public ArrayList<Treasure> getVisibleTreasures(){
-        
+        return this.currentPlayer.getVisibleTreasures();
     }
     
     public ArrayList<Treasure> getHiddenTreasures(){
-        
+        return this.currentPlayer.getHiddenTreasures();
     }
     
     public boolean nextTurn(){
