@@ -208,7 +208,7 @@ public class Player {
         
     }
     
-    public boolean makeVisibleTreasure(Treasure treasure){
+    public boolean makeTreasureVisible(Treasure treasure){
         boolean canI = this.canMakeTreasureVisible(treasure);
         if(canI){
             this.visibleTreasures.add(treasure);
@@ -328,7 +328,7 @@ public class Player {
      * @return True si el jugador está en un estado válido, false en caso contrario
      */
     public boolean validState(){
-        return this.pendingBadConsequence.isEmpty() &&
+        return (this.pendingBadConsequence == null || this.pendingBadConsequence.isEmpty()) &&
                 this.hiddenTreasures.size() <= MAXHIDDENTREASURES;
     }
     
@@ -382,6 +382,8 @@ public class Player {
         this.name = name;
         this.level = 1;
         this.dead = true;
+        this.hiddenTreasures = new ArrayList();
+        this.visibleTreasures = new ArrayList();
     }
     
     /**
@@ -402,5 +404,9 @@ public class Player {
     
     public String getName(){
         return this.name;
+    }
+    
+    public String toString(){
+        return "Nombre: " + this.name + "; Nivel " + Integer.toString(level);
     }
 }

@@ -113,7 +113,7 @@ public class Napakalaki {
     public boolean makeTreasureVisible(Treasure treasure){
         boolean canI = this.canMakeVisibleTreasure(treasure);
         if(canI){
-            this.currentPlayer.makeVisibleTreasure(treasure);
+            this.currentPlayer.makeTreasureVisible(treasure);
         }
         return canI;
     }
@@ -188,7 +188,7 @@ public class Napakalaki {
      * @see Player#validState() 
      */
     public boolean nextTurnAllowed(){
-        return this.currentPlayer.validState();
+        return this.currentPlayer == null || this.currentPlayer.validState();
     }
     
     /**
