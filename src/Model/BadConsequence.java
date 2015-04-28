@@ -176,47 +176,80 @@ public class BadConsequence {
     //                                                                        //    
     ////////////////////////////////////////////////////////////////////////////
     
+    /**
+     * Método que te extrae del mal rollo un tesoro visible, en el sentido,
+     * de que si se especifica se quita ese concreto, y si es numérico te dismi-
+     * nuye los tesoros visible que se quitan por el mal rollo una unidad.
+     * @param treasure Tesoro que se extrae.
+     */
+    
     public void substractVisibleTreasure(Treasure treasure){
+       TreasureKind discarded = null; 
+        
        if(nVisibleTreasures > 0)
            nVisibleTreasures -= 1;
        else{
          boolean encontrado = false;  
          for(TreasureKind t: this.specificVisibleTreasures){
             if(t == treasure.getType() && !encontrado){
-                this.specificVisibleTreasures.remove(t);
+                discarded = t;
                 encontrado = true;
             }
          }
+         if(discarded != null){
+             this.specificVisibleTreasures.remove(discarded);
+         }
        }
     }
-    
+    /**
+     * Método análogo a substracVisibleTreasure pero sobre los tesoros
+     * ocultos.
+     * @param treasure Tesoro que se extrae.
+     * @see BadConsequence#substractVisibleTreasure(Model.Treasure) 
+     */
     public void substractHiddenTreasure(Treasure treasure){
+        
+        TreasureKind discarded = null;
+        
         if(nHiddenTreasures > 0)
            nHiddenTreasures -= 1;
        else{
          boolean encontrado = false;  
          for(TreasureKind t: this.specificHiddenTreasures){
             if(t == treasure.getType() && !encontrado && t != null){
-                this.specificHiddenTreasures.remove(t);
+                discarded = t;
                 encontrado = true;
             }
          }
+         if (discarded != null){
+            this.specificHiddenTreasures.remove(discarded);
+         }
+         
+         
        }
     }
+    
+    /**
+     * Ajusta el mal rollo que se va a aplicaren función a los tesoros que tenga el jugador.
+     * @param visible Lista de tesoros visibles del jugador
+     * @param hidden Lista de tesoros ocultos del jugador.
+     * @return Mal rollo que queda pendiente ajustado correctamente
+     */
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
             ArrayList<Treasure> hidden){
        
+        BadConsequence badConsequence = this.copy();
         
-        if(!death){
+        if(!badConsequence.kills()){
             
-            if(this.nVisibleTreasures > 0 || this.nHiddenTreasures > 0){
-                if(this.nVisibleTreasures > visible.size()){
-                    this.nVisibleTreasures = visible.size();
+            if(badConsequence.getNVisibleTreasures() > 0 || badConsequence.getNHiddenTreasures() > 0){
+                if(badConsequence.getNVisibleTreasures() > visible.size()){
+                    badConsequence.nVisibleTreasures = visible.size();
                 }
                 
-                if(this.nHiddenTreasures > hidden.size()){
-                    this.nHiddenTreasures = hidden.size();
+                if(badConsequence.getNHiddenTreasures() > hidden.size()){
+                    badConsequence.nHiddenTreasures = hidden.size();
                 }
             }
             else{
@@ -228,16 +261,16 @@ public class BadConsequence {
                     treasure_hidden_types.add(treasure.getType());
                 }
 
-                for(int i=0; i<this.specificHiddenTreasures.size(); i++){
+                for(int i=0; i<badConsequence.getSpecificHiddenTreasures().size(); i++){
                     boolean encontrado = false;
                     for(int j=0; j<treasure_hidden_types.size() && !encontrado; j++){
-                        if(this.specificHiddenTreasures.get(i) == treasure_hidden_types.get(j)){
+                        if(badConsequence.getSpecificHiddenTreasures().get(i) == treasure_hidden_types.get(j)){
                             treasure_hidden_types.remove(treasure_hidden_types.get(j));
                             encontrado = true;
                         }
                     }
                     if(!encontrado){
-                        this.specificHiddenTreasures.remove(this.specificHiddenTreasures.get(i));
+                        badConsequence.getSpecificHiddenTreasures().remove(badConsequence.getSpecificHiddenTreasures().get(i));
                         i--;
                     }
                 }                
@@ -247,32 +280,29 @@ public class BadConsequence {
                     treasure_visible_types.add(treasure.getType());
                 }
 
-                for(int i=0; i<this.specificVisibleTreasures.size(); i++){
+                for(int i=0; i<badConsequence.getSpecificVisibleTreasures().size(); i++){
                     boolean encontrado = false;
                     for(int j=0; j<treasure_visible_types.size() && !encontrado; j++){
-                        if(this.specificVisibleTreasures.get(i) == treasure_visible_types.get(j)){
+                        if(badConsequence.getSpecificVisibleTreasures().get(i) == treasure_visible_types.get(j)){
                             treasure_visible_types.remove(treasure_visible_types.get(j));
                             encontrado = true;
                         }
                     }
                     if(!encontrado){
-                        this.specificVisibleTreasures.remove(this.specificVisibleTreasures.get(i));
+                        badConsequence.getSpecificVisibleTreasures().remove(badConsequence.getSpecificVisibleTreasures().get(i));
                         i--;
                     }
                 }
             }
         }
         
-        
-        return this;
-        
-        
+        return badConsequence;
         
     }
     
     /**
      * Método que devuelve un String con la información relativa al BadConsequence
-     * sobre el que se llama. En él viene indicado, además del texto del mal rollo,
+     * sobre el que se llama. En él viene indicado, además del temoxto del mal rollo,
      * la información respecto de lo que el monstruo te quita. Sirve de apoyo para 
      * el método toString() de la clase Monster.
      * @return String con toda la información
@@ -297,6 +327,34 @@ public class BadConsequence {
             }
         }
         return printable;
+    }
+    
+    /**
+     * Método que copia el mal rollo sin crear identidad
+     * @return Mal rollo copiado
+     */
+    
+    protected BadConsequence copy(){
+        BadConsequence badConsequence;
+        if(this.death == true){
+            badConsequence = new BadConsequence(this.text, this.death);
+        }
+        
+        else if(this.nVisibleTreasures > 0 || this.nHiddenTreasures > 0){
+            badConsequence = new BadConsequence(this.text, 0, this.nVisibleTreasures, this.nHiddenTreasures);
+        }
+        
+        else{
+            ArrayList<TreasureKind> newVisibleTreasures = new ArrayList();
+            newVisibleTreasures.addAll(this.specificVisibleTreasures);
+            
+            ArrayList <TreasureKind> newHiddenTreasures = new ArrayList();
+            newHiddenTreasures.addAll(this.specificHiddenTreasures);
+            
+            badConsequence = new BadConsequence(this.text, 0, newVisibleTreasures, newHiddenTreasures);
+        }
+        
+        return badConsequence;
     }
 }
 

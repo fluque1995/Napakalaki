@@ -88,6 +88,7 @@ public class Player {
         }
         
         this.hiddenTreasures.clear();
+        this.level = 1;
         this.dead = true;
     }
     /**
@@ -95,15 +96,16 @@ public class Player {
      */
     private void discardNecklaceIfVisible(){
         CardDealer cardDealer = CardDealer.getInstance();
+        Treasure necklace = null;
         for (Treasure t: this.visibleTreasures){
             if (t.getType() == TreasureKind.NECKLACE){
-                cardDealer.giveTreasureBack(t);
-                this.visibleTreasures.remove(t);
+                necklace = t;
             }
         }
-        
-        
-      
+        if (necklace != null){
+            this.visibleTreasures.remove(necklace);
+            cardDealer.giveTreasureBack(necklace);
+        }
     }
     
     /**
