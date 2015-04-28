@@ -72,6 +72,11 @@ public class Napakalaki {
         }
     }
     
+    /**
+     * Método que pasa el turno al siguiente jugador
+     * @return El siguiente jugador
+     */
+    
     private Player nextPlayer(){
         if (this.currentPlayerIndex == -1){
             Random rnd = new Random();
@@ -102,13 +107,30 @@ public class Napakalaki {
         return this.currentPlayer.combat(currentMonster);
     }
     
+    /**
+     * Hace que el jugador se descarte de un tesoro visible elegido por él.
+     * @param treasure Tesoro del que se descarta
+     */
+    
     public void discardVisibleTreasure(Treasure treasure){
         this.currentPlayer.discardVisibleTreasure(treasure);
     }
     
+    /**
+     * Hace que el jugador se descarte de un tesoro oculto elegido por él.
+     * @param treasure Tesoro del que se descarta
+     */
+    
     public void discardHiddenTreasure(Treasure treasure){
         this.currentPlayer.discardHiddenTreasure(treasure);
     }
+    
+    /**
+     * Método que cambia un tesoro oculto en visible.
+     * @param treasure Tesoro que se hace visible
+     * @return Devuelve un booleano diciendo si es posible o no.
+     * @see Player#makeTreasureVisible(Model.Treasure)  
+     */
     
     public boolean makeTreasureVisible(Treasure treasure){
         boolean canI = this.canMakeVisibleTreasure(treasure);
@@ -117,6 +139,14 @@ public class Napakalaki {
         }
         return canI;
     }
+    
+    /**
+     * Método que compra niveles dados a partir de ciertos elementos visible y ocultos dados.
+     * @param visibleTreasures Tesoros visibles que pones en venta para comprar niveles
+     * @param hiddenTreasures Tesoros ocultos que pones en venta para comprar niveles
+     * @return Booleano que dice si es posible comprar niveles.
+     * @see Player#buyLevels(java.util.ArrayList, java.util.ArrayList)   
+     */
     
     public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
         return currentPlayer.buyLevels(visibleTreasures, hiddenTreasures);
@@ -152,17 +182,36 @@ public class Napakalaki {
         return this.currentMonster;
     }
     
+    /**
+     * Método que indice si es posible hacer un tesoro visible
+     * @param treasure Tesoro que se quiere hacer visible
+     * @return Devuelve un booleano diciendo si es posible o no.
+     * @see Player#canMakeTreasureVisible(Model.Treasure)   
+     */
+    
     public boolean canMakeVisibleTreasure(Treasure treasure){
         return this.currentPlayer.canMakeTreasureVisible(treasure);
     }
+    
+    /**
+     * Getter de los tesoros visibles del jugador.
+     * @return Devuelve los tesoros visibles del jugador
+     */
    
     public ArrayList<Treasure> getVisibleTreasures(){
         return this.currentPlayer.getVisibleTreasures();
     }
     
+    /**
+     * Getter de los tesoros ocultos del jugador.
+     * @return Devuelve los tesoros ocultos del jugador
+     */
+    
     public ArrayList<Treasure> getHiddenTreasures(){
         return this.currentPlayer.getHiddenTreasures();
     }
+    
+    
     
     public boolean nextTurn(){
         boolean siguiente = this.nextTurnAllowed();
