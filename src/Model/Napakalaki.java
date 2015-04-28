@@ -211,7 +211,10 @@ public class Napakalaki {
         return this.currentPlayer.getHiddenTreasures();
     }
     
-    
+    /**
+     * Método que pasa el turno de jugador, y pasa de monstruo.
+     * @return Boolean diciendo si es posible pasar el turno.
+     */
     
     public boolean nextTurn(){
         boolean siguiente = this.nextTurnAllowed();

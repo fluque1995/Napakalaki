@@ -148,6 +148,11 @@ public class Player {
         return totalLevels/(float)1000;
     }
     
+    /**
+     * Método que aplica el buen rollo al jugador
+     * @param prize Buen rollo a aplicar
+     */
+    
     public void applyPrize(Prize prize){
         int nLevels = prize.getLevels();
         this.incrementLevels(nLevels);
@@ -160,6 +165,14 @@ public class Player {
         }
         
     }
+    
+    /**
+     * Método en que se ejecuta el combate del jugador con el monstruo
+     * generando la correspondiente salida en funcion a lo ocurrido en el
+     * combate
+     * @param monster Monstruo contra el que lucha
+     * @return El resultado del combate
+     */
     
     public CombatResult combat(Monster monster){
         CombatResult combatResult;
@@ -200,6 +213,11 @@ public class Player {
         return combatResult;
     }
     
+    /**
+     * Método en que se aplica el mal rollo al jugador
+     * @param badConsequence Mal rollo que se aplica
+     */
+    
     public void applyBadConsequence(BadConsequence badConsequence){
         int nLevels = badConsequence.getLevels();
         this.decrementLevels(nLevels);
@@ -209,6 +227,12 @@ public class Player {
         this.setPendingBadConsequence(pendingBad);
         
     }
+    
+    /**
+     * Método que indica si un tesoro puede pasar de oculto a visible
+     * @param treasure Tesoro que se quiere pasar a visible
+     * @return Boolean que indica si es posible o no.
+     */
     
     public boolean makeTreasureVisible(Treasure treasure){
         boolean canI = this.canMakeTreasureVisible(treasure);
@@ -257,6 +281,12 @@ public class Player {
         return allowed;
     }
     
+    /**
+     * Método en que el jugador se descarta de un tesoro visible y lo
+     * envía a la baraja de cartas.
+     * @param treasure Tesoro visible del que te quieres descartar
+     */
+    
     public void discardVisibleTreasure(Treasure treasure){
         this.visibleTreasures.remove(treasure);
         if((this.pendingBadConsequence != null) && (!this.pendingBadConsequence.isEmpty())){
@@ -268,6 +298,12 @@ public class Player {
         
     }
     
+     /**
+     * Método en que el jugador se descarta de un tesoro oculto y lo
+     * envía a la baraja de cartas.
+     * @param treasure Tesoro oculto del que te quieres descartar
+     */
+    
     public void discardHiddenTreasure(Treasure treasure){
         this.hiddenTreasures.remove(treasure);
         if((this.pendingBadConsequence != null) && (!this.pendingBadConsequence.isEmpty())){
@@ -277,6 +313,13 @@ public class Player {
         dealer.giveTreasureBack(treasure);
         this.dieIfNoTreasures();
     }
+    
+     /**
+     * Método que ajusta la compra de niveles y devuelve si es posible o no
+     * @param visibleTreasures Tesoros visibles que se quieren poner en venta para comprar niveles
+     * @param hiddenTreasures Tesoros ocultos que se quieren poner en venta para comprar un nivel
+     * @return Boolean indicando si es posible comprar niveles o no
+     */
     
     public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
         float levels = this.computeGoldCoinsValue(visibleTreasures);
@@ -333,6 +376,11 @@ public class Player {
         return (this.pendingBadConsequence == null || this.pendingBadConsequence.isEmpty()) &&
                 this.hiddenTreasures.size() <= MAXHIDDENTREASURES;
     }
+    
+     /**
+     * Método en que se inician los tesoros del jugador, bien porque es su primera mano,
+     * o bien porque ha muerto y comienza de nuevo.
+     */
     
     public void initTreasures(){
         this.bringToLife();
@@ -404,9 +452,19 @@ public class Player {
         return this.hiddenTreasures;
     }
     
+     /**
+     * Getter del nombre del jugador
+     * @return El nombre del jugador
+     */
+    
     public String getName(){
         return this.name;
     }
+    
+    /**
+     * Método que devuelve el nombre y nivel del jugador
+     * @return Nombre y nivel del jugador
+     */
     
     public String toString(){
         return "Nombre: " + this.name + "; Nivel " + Integer.toString(level);
