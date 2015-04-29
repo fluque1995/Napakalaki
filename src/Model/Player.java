@@ -210,6 +210,8 @@ public class Player {
             }
         }
         this.discardNecklaceIfVisible();
+        CardDealer dealer = CardDealer.getInstance();
+        dealer.giveMonsterBack(monster);
         return combatResult;
     }
     

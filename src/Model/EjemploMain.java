@@ -12,5 +12,5 @@ public class EjemploMain {
       // Poner el numero de jugadores con el que se quiera probar
       test.play(game, 1); 
         
-    }
+    }        
 }

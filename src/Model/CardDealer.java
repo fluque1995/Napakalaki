@@ -51,8 +51,6 @@ public class CardDealer {
         this.usedMonsters = new ArrayList();
         this.unusedTreasures = new ArrayList();
         this.usedTreasures = new ArrayList();
-        
-        this.initCards();
     }
     
     /**
@@ -91,14 +89,14 @@ public class CardDealer {
      * Monster deck shuffler
      */
     private void shuffleTreasures(){
-        Collections.shuffle(this.unusedTreasures, new Random());
+        Collections.shuffle(this.unusedTreasures);
     }
     
     /**
      * Monster deck shuffler
      */
     private void shuffleMonsters(){
-        Collections.shuffle(this.unusedMonsters, new Random());
+        Collections.shuffle(this.unusedMonsters);
     }
     
     /**
@@ -107,13 +105,21 @@ public class CardDealer {
      * @return Tesoro siguiente
      */
     public Treasure nextTreasure(){
-        Treasure t = unusedTreasures.get(0);
-        unusedTreasures.remove(0);
+        Treasure t;
+        
         if(unusedTreasures.isEmpty()){
             unusedTreasures = usedTreasures;
-            usedTreasures = new ArrayList();
+            usedTreasures = new ArrayList<>();
             this.shuffleTreasures();
+            
+            t = unusedTreasures.get(0);
+            unusedTreasures.remove(0);
         }
+        else{
+            t = unusedTreasures.get(0);
+            unusedTreasures.remove(0);
+        }
+            
         return t;
     }
     
@@ -123,13 +129,22 @@ public class CardDealer {
      * @return Monstruo siguiente
      */
     public Monster nextMonster(){
-        Monster m = unusedMonsters.get(0);
-        unusedMonsters.remove(0);
+        Monster m;
+        
         if(unusedMonsters.isEmpty()){
             unusedMonsters = usedMonsters;
-            usedMonsters = new ArrayList();
+            usedTreasures = new ArrayList<>();
             this.shuffleMonsters();
+        
+            m = unusedMonsters.get(0);
+            unusedMonsters.remove(m);    
+            
         }
+        else{
+            m = unusedMonsters.get(0);
+            unusedMonsters.remove(m);
+        }
+        
         return m;
     }
     
