@@ -216,6 +216,8 @@ public class CardDealer {
         this.unusedTreasures.add(new Treasure("Escopeta de tres cañones", 700, 4, 6, TreasureKind.BOTHHANDS));
         this.unusedTreasures.add(new Treasure("Garabato místico", 300, 2, 2, TreasureKind.ONEHAND));
         this.unusedTreasures.add(new Treasure("La fuerza de Mr. T", 1000, 0, 0, TreasureKind.NECKLACE));
+        
+        /*
         this.unusedTreasures.add(new Treasure("La rebeca metálica", 400, 2, 3, TreasureKind.ARMOR));
         this.unusedTreasures.add(new Treasure("Mazo de los antiguos", 200, 3, 4, TreasureKind.ONEHAND));
         this.unusedTreasures.add(new Treasure("Necroplayboycon", 300, 3, 5, TreasureKind.ONEHAND));
@@ -230,7 +232,7 @@ public class CardDealer {
         this.unusedTreasures.add(new Treasure("Zapato deja-amigos", 500, 0, 1, TreasureKind.SHOE));
         this.unusedTreasures.add(new Treasure("Shogulador", 600, 1, 1, TreasureKind.BOTHHANDS));
         this.unusedTreasures.add(new Treasure("Varita de atizamiento", 400, 3, 4, TreasureKind.ONEHAND));
-        
+        */
     }
     
     /*
@@ -255,6 +257,12 @@ public class CardDealer {
                         + "Pierdes el calzado visible", 0, 
                         new ArrayList(Arrays.asList(TreasureKind.SHOE)), new ArrayList());
         this.unusedMonsters.add(new Monster("El sopor de Dunwich", 2, badConsequence, prize));
+        
+        prize = new Prize(2,1);
+        badConsequence = new BadConsequence("Te intentas escaquear. Pierdes una"
+                        + " mano visible", 0, new ArrayList(Arrays.asList(TreasureKind.ONEHAND)),
+                        new ArrayList());
+        this.unusedMonsters.add(new Monster("Dameargo", 1, badConsequence, prize));
         
         prize = new Prize(4,1);
         badConsequence = new BadConsequence("Te atrapan para llevarte de fiesta y "
@@ -300,13 +308,7 @@ public class CardDealer {
         badConsequence = new BadConsequence("Pierdes dos niveles y dos tesoros "
                         + "ocultos.", 2, 0, 2);
         this.unusedMonsters.add(new Monster("Semillas Cthulhu", 4, badConsequence, prize));
-        
-        prize = new Prize(2,1);
-        badConsequence = new BadConsequence("Te intentas escaquear. Pierdes una"
-                        + " mano visible", 0, new ArrayList(Arrays.asList(TreasureKind.ONEHAND)),
-                        new ArrayList());
-        this.unusedMonsters.add(new Monster("Dameargo", 1, badConsequence, prize));
-        
+                
         prize = new Prize(1,1);
         badConsequence = new BadConsequence("Da mucho asquito. Pierdes 3 niveles",
                         3, 0, 0);
