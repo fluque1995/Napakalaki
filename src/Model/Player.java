@@ -177,7 +177,7 @@ public class Player {
     public CombatResult combat(Monster monster){
         CombatResult combatResult;
         int myLevel = this.getCombatLevel();
-        int levelMonster = monster.getLevel();
+        int levelMonster = this.getOponentLevel(monster);
         if(myLevel > levelMonster){
            Prize prize = monster.getPrize();
            this.applyPrize(prize);
@@ -201,7 +201,12 @@ public class Player {
                 }
                 else{
                     this.applyBadConsequence(bad);
-                    combatResult = CombatResult.LOSE;
+                    if(this.shouldConvert()){
+                        combatResult = CombatResult.LOSEANDCONVERT;
+                    }
+                    else{
+                        combatResult = CombatResult.LOSE;
+                    }
                 }
             }
             
@@ -438,6 +443,15 @@ public class Player {
         this.visibleTreasures = new ArrayList();
     }
     
+    public Player(Player p){
+        this.dead = p.dead;
+        this.hiddenTreasures = p.hiddenTreasures;
+        this.level = p.level;
+        this.name = p.name;
+        this.pendingBadConsequence = p.pendingBadConsequence;
+        this.visibleTreasures = p.visibleTreasures;
+    }
+    
     /**
      * Getter para el array de tesoros visibles. 
      * @return Array de tesoros visibles
@@ -469,6 +483,52 @@ public class Player {
      */
     
     public String toString(){
-        return "Nombre: " + this.name + "; Nivel " + Integer.toString(level);
+        String printable = "Nombre: " + this.name + "; Nivel " + Integer.toString(level) + 
+                "; CombatLevel: " + Integer.toString(this.getCombatLevel());
+        
+        /*if(this.pendingBadConsequence.isEmpty() == false && this.pendingBadConsequence != null){
+            printable += pendingBadConsequence.toString();
+        }*/
+        
+        if(this.visibleTreasures.isEmpty() == false){
+            printable += "\nTesoros visibles:\n\t\t ";
+            for(Treasure t: this.visibleTreasures){
+                printable += t.toString();
+            }
+        }
+        
+        if(this.hiddenTreasures.isEmpty() == false){
+            printable += "\nTesoros ocultos:\n\t\t ";
+            for(Treasure t: this.hiddenTreasures){
+                printable += t.toString();
+            }
+        }
+        
+        if(this.pendingBadConsequence == null || this.pendingBadConsequence.isEmpty()){
+            printable += "\n No tienes mal rollo pendiente ";
+        }
+        else{
+            printable += "\n Mal rollo: " + this.pendingBadConsequence.toString();
+        }
+        
+        return printable;
+                
     }
+    
+    protected boolean shouldConvert(){
+        boolean should = false;
+        Dice dice = Dice.getInstance();
+        
+        if(dice.nextNumber() == 6 ){
+            should = true;
+            
+        }
+        
+        return should;
+    }
+    
+    protected int getOponentLevel(Monster m){
+        return m.getLevel();
+    }
+    
 }

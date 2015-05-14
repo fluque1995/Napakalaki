@@ -36,6 +36,7 @@ public class CardDealer {
     
     private ArrayList<Treasure> unusedTreasures, usedTreasures;
     private ArrayList<Monster> unusedMonsters, usedMonsters;
+    private ArrayList<Cultist> unusedCultists;
     
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -51,6 +52,7 @@ public class CardDealer {
         this.usedMonsters = new ArrayList();
         this.unusedTreasures = new ArrayList();
         this.usedTreasures = new ArrayList();
+        this.unusedCultists = new ArrayList();
     }
     
     /**
@@ -90,6 +92,10 @@ public class CardDealer {
      */
     private void shuffleTreasures(){
         Collections.shuffle(this.unusedTreasures);
+    }
+    
+    private void shuffleCultist(){
+        Collections.shuffle(this.unusedCultists);
     }
     
     /**
@@ -146,6 +152,11 @@ public class CardDealer {
         }
         
         return m;
+    }
+    
+    
+    public Cultist nextCultist(){
+        return this.unusedCultists.remove(0);
     }
     
     /**
@@ -344,5 +355,15 @@ public class CardDealer {
                         new ArrayList());
         prize = new Prize(1,1);
         this.unusedMonsters.add(new Monster("Bicéfalo", 20, badConsequence, prize));
+    }
+    
+    private void initCultistCardDeck(){
+        this.unusedCultists.add(new Cultist("Sectario",1));
+        this.unusedCultists.add(new Cultist("Sectario",1));
+        this.unusedCultists.add(new Cultist("Sectario",1));
+        this.unusedCultists.add(new Cultist("Sectario",1));
+        this.unusedCultists.add(new Cultist("Sectario",2));
+        this.unusedCultists.add(new Cultist("Sectario",2));
+        
     }
 }

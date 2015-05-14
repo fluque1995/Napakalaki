@@ -104,7 +104,15 @@ public class Napakalaki {
      * @return Resultado del combate
      */
     public CombatResult combat(){
-        return this.currentPlayer.combat(currentMonster);
+        CombatResult result = this.currentPlayer.combat(currentMonster);
+        CardDealer dealer = CardDealer.getInstance();
+        if(result == CombatResult.LOSEANDCONVERT){
+            Cultist c = dealer.nextCultist();
+            CultistPlayer cultistPlayer = new CultistPlayer(this.currentPlayer, c);
+            this.currentPlayer = cultistPlayer;
+            this.players.set(currentPlayerIndex, currentPlayer);
+        }
+        return result;
     }
     
     /**
@@ -254,4 +262,6 @@ public class Napakalaki {
     public boolean endOfGame(CombatResult result){
         return result == CombatResult.WINANDWINGAME;
     }
+    
+    
 }

@@ -19,7 +19,7 @@ package Model;
  * 5.- Tipo de tesoro. No se pueden llevar equipados dos tesoros del mismo tipo.
  * El tipo de tesoros posibles se encuentra en el enumerado {@link TreasureKind}
  */
-public class Treasure {
+public class Treasure implements Card{
     
     private String name;
     private int goldCoins;
@@ -97,6 +97,19 @@ public class Treasure {
     public String toString(){
         return "Nombre: " + this.name + ", precio: " + Integer.toString(goldCoins) +
                 ", bonus mínimo: " + Integer.toString(minBonus) + ", bonus "
-                + "máximo: " + Integer.toString(maxBonus) + ", tipo: " + type.name();
+                + "máximo: " + Integer.toString(maxBonus) + ", tipo: " + type.name() + "\n";
     }
+    
+    @Override
+    public int getBasicValue(){
+        return this.getMinBonus();
+    }
+    
+    @Override
+    public int getSpecialValue(){
+        return this.getMaxBonus();
+    }
+    
+    
+    
 }

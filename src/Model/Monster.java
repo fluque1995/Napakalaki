@@ -16,7 +16,7 @@ package Model;
  * 4.- Mal rollo que provoca en el jugador si pierde el combate, representado por
  * un objeto de la clase {@link BadConsequence}
  */
-public class Monster {
+public class Monster implements Card{
     
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -28,7 +28,7 @@ public class Monster {
     private int combatLevel;
     private BadConsequence badConsequence;
     private Prize prize;
-    
+    private int levelChangeAgainstCultistPlayer;
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
     //                               Constructor                              //
@@ -42,6 +42,15 @@ public class Monster {
      * @param prize Premio por victoria
      * @param bc Mal rollo por derrota
      */
+    public Monster(String name, int combatLevel,int levelChange, BadConsequence bc, Prize prize){
+        
+        this.name = name;
+        this.combatLevel = combatLevel;
+        this.badConsequence = bc;
+        this.prize = prize;
+        this.levelChangeAgainstCultistPlayer = levelChange;
+    }
+    
     public Monster(String name, int combatLevel, BadConsequence bc, Prize prize){
         
         this.name = name;
@@ -102,4 +111,15 @@ public class Monster {
                 badConsequence.toString() + "\n";
         
     }
+    
+    @Override
+    public int getBasicValue(){
+        return this.getLevel();
+    }
+    
+    @Override
+    public int getSpecialValue(){
+        return this.getLevel() + this.levelChangeAgainstCultistPlayer;
+    }
+        
 }

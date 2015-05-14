@@ -30,6 +30,10 @@ public enum CombatResult {
      */
     LOSEANDESCAPE,
     /**
+     * El jugador pierde y se convierte en sectario
+     */
+    LOSEANDCONVERT,
+    /**
      * El jugador pierde el combate y muere
      */
     LOSEANDDIE;
