@@ -79,6 +79,8 @@ public class CardDealer {
         this.shuffleMonsters();
         this.initTreasureCardDeck();
         this.shuffleTreasures();
+        this.initCultistCardDeck();
+        this.shuffleCultists();
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -94,7 +96,7 @@ public class CardDealer {
         Collections.shuffle(this.unusedTreasures);
     }
     
-    private void shuffleCultist(){
+    private void shuffleCultists(){
         Collections.shuffle(this.unusedCultists);
     }
     
