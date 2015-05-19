@@ -47,4 +47,38 @@ public class CultistPlayer extends Player {
         return 2*super.computeGoldCoinsValue(treasure);
     }
     
+    @Override
+    public String toString(){
+        String printable = "Nombre: " + this.getName() + "Soy un cultist player; Info:\n ; Nivel " + Integer.toString(this.getLevel()) + 
+                "; CombatLevel: " + Integer.toString(this.getCombatLevel());
+        
+        /*if(this.pendingBadConsequence.isEmpty() == false && this.pendingBadConsequence != null){
+            printable += pendingBadConsequence.toString();
+        }*/
+        
+        if(this.getVisibleTreasures().isEmpty() == false){
+            printable += "\nTesoros visibles:\n\t\t ";
+            for(Treasure t: this.getVisibleTreasures()){
+                printable += t.toString();
+            }
+        }
+        
+        if(this.getHiddenTreasures().isEmpty() == false){
+            printable += "\nTesoros ocultos:\n\t\t ";
+            for(Treasure t: this.getHiddenTreasures()){
+                printable += t.toString();
+            }
+        }
+        
+        if(this.getPendingBadConsequence() == null || this.getPendingBadConsequence().isEmpty()){
+            printable += "\n No tienes mal rollo pendiente ";
+        }
+        else{
+            printable += "\n Mal rollo: " + this.getPendingBadConsequence().toString();
+        }
+        
+        return printable;
+                
+    }
+    
 }

@@ -220,6 +220,10 @@ public class Player {
         return combatResult;
     }
     
+    public BadConsequence getPendingBadConsequence(){
+        return this.pendingBadConsequence;
+    }
+    
     /**
      * Método en que se aplica el mal rollo al jugador
      * @param badConsequence Mal rollo que se aplica
@@ -477,6 +481,10 @@ public class Player {
         return this.name;
     }
     
+    public int getLevel(){
+        return this.level;
+    }
+    
     /**
      * Método que devuelve el nombre y nivel del jugador
      * @return Nombre y nivel del jugador
@@ -519,7 +527,7 @@ public class Player {
         boolean should = false;
         Dice dice = Dice.getInstance();
         
-        if(dice.nextNumber() == 6 ){
+        if(dice.nextNumber() <= 6 ){
             should = true;
             
         }

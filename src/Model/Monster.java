@@ -106,9 +106,16 @@ public class Monster implements Card{
      */
     public String toString(){
         
-        return "Name = " + name + ", combat level = " + Integer.toString(combatLevel) +
-                "\n\tPrize: " + prize.toString() + "\n\tBad consequence: " +
+        String text = "Name = " + name + ", combat level = " + Integer.toString(combatLevel);
+        
+        if(this.levelChangeAgainstCultistPlayer != 0){
+            text += ", modificación de nivel contra sectarios = " + Integer.toString(this.levelChangeAgainstCultistPlayer);
+        }
+         
+        text += "\n\tPrize: " + prize.toString() + "\n\tBad consequence: " +
                 badConsequence.toString() + "\n";
+        
+        return text;
         
     }
     
