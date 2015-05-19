@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * 3.- Mal rollo en el que el monstruo te mata
  * @see Monster
  */
-public class BadConsequence {
+public abstract class BadConsequence {
     
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -26,14 +26,14 @@ public class BadConsequence {
     //                                                                        //    
     ////////////////////////////////////////////////////////////////////////////
     
-    private String text;
-    private int levels;
-    private int nVisibleTreasures;
-    private int nHiddenTreasures;
-    private boolean death;
+    protected String text;
+    protected int levels;
+    protected int nVisibleTreasures;
+    protected int nHiddenTreasures;
+    protected boolean death;
     
-    private ArrayList<TreasureKind> specificVisibleTreasures;
-    private ArrayList<TreasureKind> specificHiddenTreasures;
+    protected ArrayList<TreasureKind> specificVisibleTreasures;
+    protected ArrayList<TreasureKind> specificHiddenTreasures;
     
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -49,15 +49,16 @@ public class BadConsequence {
      * @param nVisible Tesoros visibles que te quita el monstruo
      * @param nHidden Tesoros ocultos que te quita el monstruo
      */
-    public BadConsequence(String text, int levels, int nVisible, int nHidden){
+    public BadConsequence(String text, int levels, int nVisible, int nHidden, ArrayList<TreasureKind> tVisible, 
+                            ArrayList<TreasureKind> tHidden, boolean death){
         
         this.text = text;
         this.levels = levels;
         this.nVisibleTreasures = nVisible;
         this.nHiddenTreasures = nHidden;
-        this.death = false;
-        this.specificVisibleTreasures = new ArrayList();
-        this.specificHiddenTreasures = new ArrayList();     
+        this.death = death;
+        this.specificVisibleTreasures = tVisible;
+        this.specificHiddenTreasures = tHidden;     
     }
     
     /**
@@ -65,7 +66,7 @@ public class BadConsequence {
      * @param text Texto del mal rollo
      * @param death Bool que indica si el monstruo te mata
      */
-    public BadConsequence(String text, boolean death){
+    /*public BadConsequence(String text, boolean death){
         
         this.text = text;
         this.levels = 0;
@@ -74,7 +75,7 @@ public class BadConsequence {
         this.death = death;
         this.specificVisibleTreasures = new ArrayList();
         this.specificHiddenTreasures = new ArrayList();
-    }
+    }*/
     
     /**
      * Constructor para BadConsequence que especifica el tipo de tesoros que se 
@@ -85,8 +86,7 @@ public class BadConsequence {
      * @param tVisible Array con los tesoros visibles que se pierden
      * @param tHidden Array con los tesoros ocultos que se pierden
      */
-    public BadConsequence(String text, int levels, ArrayList<TreasureKind> tVisible, 
-                            ArrayList<TreasureKind> tHidden){
+   /* public BadConsequence(String text, int levels, 
         
         this.text = text;
         this.levels = levels;
@@ -95,7 +95,7 @@ public class BadConsequence {
         this.death = false;
         this.specificVisibleTreasures = tVisible;
         this.specificHiddenTreasures = tHidden;    
-    }
+    }*/
     
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -183,7 +183,7 @@ public class BadConsequence {
      * @param treasure Tesoro que se extrae.
      */
     
-    public void substractVisibleTreasure(Treasure treasure){
+    public abstract void substractVisibleTreasure(Treasure treasure);/*{
        TreasureKind discarded = null; 
         
        if(nVisibleTreasures > 0)
@@ -200,14 +200,14 @@ public class BadConsequence {
              this.specificVisibleTreasures.remove(discarded);
          }
        }
-    }
+    }*/
     /**
      * Método análogo a substracVisibleTreasure pero sobre los tesoros
      * ocultos.
      * @param treasure Tesoro que se extrae.
      * @see BadConsequence#substractVisibleTreasure(Model.Treasure) 
      */
-    public void substractHiddenTreasure(Treasure treasure){
+    public abstract void substractHiddenTreasure(Treasure treasure);/*{
         
         TreasureKind discarded = null;
         
@@ -227,7 +227,7 @@ public class BadConsequence {
          
          
        }
-    }
+    }*/
     
     /**
      * Ajusta el mal rollo que se va a aplicaren función a los tesoros que tenga el jugador.
@@ -236,8 +236,8 @@ public class BadConsequence {
      * @return Mal rollo que queda pendiente ajustado correctamente
      */
     
-    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
-            ArrayList<Treasure> hidden){
+    public abstract BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
+            ArrayList<Treasure> hidden);/*{
        
         BadConsequence badConsequence = this.copy();
         
@@ -298,7 +298,7 @@ public class BadConsequence {
         
         return badConsequence;
         
-    }
+    }*/
     
     /**
      * Método que devuelve un String con la información relativa al BadConsequence
@@ -309,7 +309,10 @@ public class BadConsequence {
      * @see Monster#toString() 
      */
     public String toString(){
-        String printable ="Text = " + text + "\n\t\tLevels = " + Integer.toString(levels) +
+        
+        String printable = "Esto es un mal rollo con el siguiente contenido: ";
+        return printable;
+        /*String printable ="Text = " + text + "\n\t\tLevels = " + Integer.toString(levels) +
                           ", visible treasures = " + Integer.toString(nVisibleTreasures) +
                           ", hidden treasures = " + Integer.toString(nHiddenTreasures);
         
@@ -326,7 +329,7 @@ public class BadConsequence {
                 printable += treasure.name() + ", ";
             }
         }
-        return printable;
+        return printable;*/
     }
     
     /**
@@ -334,7 +337,7 @@ public class BadConsequence {
      * @return Mal rollo copiado
      */
     
-    protected BadConsequence copy(){
+    protected abstract BadConsequence copy();/*{
         BadConsequence badConsequence;
         if(this.death == true){
             badConsequence = new BadConsequence(this.text, this.death);
@@ -355,7 +358,7 @@ public class BadConsequence {
         }
         
         return badConsequence;
-    }
+    }*/
 }
 
 
