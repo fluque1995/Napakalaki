@@ -49,7 +49,7 @@ public class CultistPlayer extends Player {
     
     @Override
     public String toString(){
-        String printable = "Nombre: " + this.getName() + "Soy un cultist player; Info:\n ; Nivel " + Integer.toString(this.getLevel()) + 
+        String printable = "Nombre: " + this.getName() + "\nEres un cultist player; Info:\n ; Nivel " + Integer.toString(this.getLevel()) + 
                 "; CombatLevel: " + Integer.toString(this.getCombatLevel());
         
         /*if(this.pendingBadConsequence.isEmpty() == false && this.pendingBadConsequence != null){

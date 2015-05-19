@@ -65,6 +65,9 @@ public class GameTester {
             case LOSEANDDIE :
               System.out.println ("\n\n Perdiste el combate y además estás muerto");
               break;
+            case LOSEANDCONVERT :
+              System.out.println ("\n\n Perdiste el combate pero te conviertes en sectario");
+              break;  
           }
           if (combatResult != CombatResult.WINANDWINGAME) {
             do { // Hasta que se avance de turno 
