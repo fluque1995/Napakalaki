@@ -19,12 +19,14 @@ public class NumberBadConsequence extends BadConsequence {
     
     @Override
     public void substractVisibleTreasure(Treasure treasure){
-        this.nVisibleTreasures -= 1;
+        if(this.nVisibleTreasures >0)
+            this.nVisibleTreasures -= 1;
     }
     
     @Override
     public void substractHiddenTreasure(Treasure treasure){
-        this.nHiddenTreasures -= 1;
+        if(this.nHiddenTreasures > 0)
+            this.nHiddenTreasures -= 1;
     }
     
     @Override
@@ -60,5 +62,6 @@ public class NumberBadConsequence extends BadConsequence {
         
         return printable;
     }
+    
     
 }

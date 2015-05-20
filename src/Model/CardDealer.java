@@ -255,7 +255,7 @@ public class CardDealer {
                         0, new ArrayList(Arrays.asList(TreasureKind.ARMOR)),
                         new ArrayList(Arrays.asList(TreasureKind.ARMOR)));
         this.unusedMonsters.add(new Monster("3 Byakhees de bonanza", 8, badConsequence, prize));
-       /*
+       
         prize = new Prize(1,1);
         badConsequence = new SpecificBadConsequence("Embobados con el lindo primigenio, "
                         + "te descartas de tu casco visible", 0,
@@ -356,7 +356,7 @@ public class CardDealer {
                         3, new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)),
                         new ArrayList());
         prize = new Prize(1,1);
-        this.unusedMonsters.add(new Monster("Bicéfalo", 20, badConsequence, prize));*/
+        this.unusedMonsters.add(new Monster("Bicéfalo", 20, badConsequence, prize));
         
         badConsequence = new SpecificBadConsequence("Pierdes una mano visible",
                         0, new ArrayList(Arrays.asList(TreasureKind.ONEHAND)),

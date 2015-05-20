@@ -57,6 +57,7 @@ public class Monster implements Card{
         this.combatLevel = combatLevel;
         this.badConsequence = bc;
         this.prize = prize;
+        this.levelChangeAgainstCultistPlayer = 0;
     }
     
     ////////////////////////////////////////////////////////////////////////////

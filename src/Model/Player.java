@@ -42,6 +42,10 @@ public class Player {
         this.dead = false;
     }
     
+/*    public void vidaTrue(){
+        this.dead = false;
+    }  
+ */  
     /**
      * Increment the player level
      * @param levels Incremented levels
@@ -539,4 +543,11 @@ public class Player {
         return m.getLevel();
     }
     
+    public void setVisibleTreasures(ArrayList<Treasure> treasures){
+        this.visibleTreasures = treasures;
+    }
+    
+    public void setHiddenTreasures(ArrayList<Treasure> treasures){
+        this.hiddenTreasures = treasures;
+    }
 }

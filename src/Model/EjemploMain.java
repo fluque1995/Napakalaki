@@ -10,7 +10,10 @@ public class EjemploMain {
       GameTester test = GameTester.getInstance();
       
       // Poner el numero de jugadores con el que se quiera probar
-      test.play(game, 2); 
+      test.play(game, 2);
+        
+      /*ExamenPadre exam = new ExamenHijo();
+      exam.run();*/
         
     }        
 }
