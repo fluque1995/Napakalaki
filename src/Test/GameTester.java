@@ -71,6 +71,7 @@ public class GameTester {
           }
           if (combatResult != CombatResult.WINANDWINGAME) {
             do { // Hasta que se avance de turno 
+              currentPlayer = game.getCurrentPlayer();
               System.out.println ("******* ******* ******* ******* ******* ******* *******");
               System.out.println ("\n\n Turno de: " + currentPlayer.toString());
               command = getCommandAfterFighting();
