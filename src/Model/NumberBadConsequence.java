@@ -17,6 +17,12 @@ public class NumberBadConsequence extends BadConsequence {
         super(text, level, nVisible, nHidden, new ArrayList(), new ArrayList(), false);
     }
     
+    @Override 
+    public boolean isEmpty(){
+        return (this.nVisibleTreasures == 0 && 
+                this.nHiddenTreasures == 0);
+    }
+    
     @Override
     public void substractVisibleTreasure(Treasure treasure){
         if(this.nVisibleTreasures >0)

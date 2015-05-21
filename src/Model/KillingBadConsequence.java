@@ -18,6 +18,11 @@ public class KillingBadConsequence extends BadConsequence{
     }
     
     @Override
+    public boolean isEmpty(){
+        return true;
+    }
+    
+    @Override
     public void substractVisibleTreasure(Treasure treasure){}
     
     @Override

@@ -118,7 +118,7 @@ public class Player {
      */
     private void dieIfNoTreasures(){
         if(this.hiddenTreasures.isEmpty() && this.visibleTreasures.isEmpty()){
-            this.dead = true;
+            this.die();
         }
     }
     

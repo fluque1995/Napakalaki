@@ -16,6 +16,7 @@ public class ExamenHijo extends ExamenPadre {
     @Override
     public void run(){
         Cultist c = new Cultist("Sectario", 3);
+        System.out.println(c.to_String());
         Player p1 = new Player("moya");
         ArrayList<Treasure> visible = new ArrayList();
         ArrayList<Treasure> hidden = new ArrayList();

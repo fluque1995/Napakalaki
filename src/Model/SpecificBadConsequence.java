@@ -19,6 +19,12 @@ public class SpecificBadConsequence extends BadConsequence{
     }
     
     @Override
+    public boolean isEmpty(){
+        return (this.specificVisibleTreasures == null || this.specificVisibleTreasures.isEmpty()) &&
+                (this.specificHiddenTreasures == null || this.specificHiddenTreasures.isEmpty());
+    }
+    
+    @Override
     public void substractVisibleTreasure(Treasure treasure){
         TreasureKind discarded = null;
         boolean encontrado = false;  

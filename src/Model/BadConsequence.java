@@ -107,12 +107,12 @@ public abstract class BadConsequence {
      * Comprueba si el mal rollo está vacío.
      * @return Boolean que indica si el mal rollo está vacío
      */
-    public boolean isEmpty(){
+    public abstract boolean isEmpty();/*{
         return this.levels == 0 && this.nVisibleTreasures == 0 && 
                 this.nHiddenTreasures == 0 && this.death == false && 
                 (this.specificVisibleTreasures == null || this.specificVisibleTreasures.isEmpty()) &&
                 (this.specificHiddenTreasures == null || this.specificHiddenTreasures.isEmpty());
-    }
+    }*/
     
     /**
      * Getter para el boolean que indica si el monstruo te mata.
