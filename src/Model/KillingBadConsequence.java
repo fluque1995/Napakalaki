@@ -47,7 +47,7 @@ public class KillingBadConsequence extends BadConsequence{
     @Override 
     public String toString(){
         String printable = super.toString() + "muerte.\n";
-        printable += "Estás muerto.";
+        printable += this.text;
         return printable;
     }
     
