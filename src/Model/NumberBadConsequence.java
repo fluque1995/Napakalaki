@@ -13,14 +13,36 @@ import java.util.ArrayList;
  */
 public class NumberBadConsequence extends BadConsequence {
     
-    public NumberBadConsequence(String text, int level, int nVisible, int nHidden){
-        super(text, level, nVisible, nHidden, new ArrayList(), new ArrayList(), false);
+    protected int levels;
+    protected int nVisibleTreasures;
+    protected int nHiddenTreasures;
+    
+    public NumberBadConsequence(String text, int levels, int nVisible, int nHidden){
+        super(text);
+        this.levels = levels;
+        this.nVisibleTreasures = nVisible;
+        this.nHiddenTreasures = nHidden;
     }
     
     @Override 
     public boolean isEmpty(){
         return (this.nVisibleTreasures == 0 && 
                 this.nHiddenTreasures == 0);
+    }
+    
+    @Override
+    public int getLevels(){
+        return this.levels;
+    }
+    
+    @Override
+    public int getNVisibleTreasures(){
+        return this.nVisibleTreasures;
+    }
+    
+    @Override
+    public int getNHiddenTreasures(){
+        return this.nHiddenTreasures;
     }
     
     @Override
@@ -38,7 +60,7 @@ public class NumberBadConsequence extends BadConsequence {
     @Override
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
             ArrayList<Treasure> hidden){
-        BadConsequence badConsequence = this.copy();
+        NumberBadConsequence badConsequence = (NumberBadConsequence) this.copy();
         if(badConsequence.getNVisibleTreasures() > visible.size()){
             badConsequence.nVisibleTreasures = visible.size();
         }
@@ -69,5 +91,14 @@ public class NumberBadConsequence extends BadConsequence {
         return printable;
     }
     
+    @Override
+    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
+        return null;
+    }
+    
+    @Override
+    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
+        return null;
+    }
     
 }

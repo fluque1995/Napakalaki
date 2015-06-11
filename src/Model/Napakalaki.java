@@ -263,5 +263,4 @@ public class Napakalaki {
         return result == CombatResult.WINANDWINGAME;
     }
     
-    
 }

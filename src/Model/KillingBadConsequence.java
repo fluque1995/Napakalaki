@@ -14,11 +14,16 @@ import java.util.ArrayList;
 public class KillingBadConsequence extends BadConsequence{
     
     public KillingBadConsequence(String text){
-        super(text, 0, 0, 0, new ArrayList(), new ArrayList(), true);
+        super(text);
     }
     
     @Override
     public boolean isEmpty(){
+        return true;
+    }
+    
+    @Override
+    public boolean kills(){
         return true;
     }
     
@@ -51,4 +56,28 @@ public class KillingBadConsequence extends BadConsequence{
         return printable;
     }
     
+    @Override
+    public int getLevels(){
+        return 0;
+    }
+
+    @Override
+    public int getNVisibleTreasures() {
+        return 0;
+    }
+
+    @Override
+    public int getNHiddenTreasures() {
+        return 0;
+    }
+    
+    @Override
+    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
+        return null;
+    }
+    
+    @Override
+    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
+        return null;
+    }
 }

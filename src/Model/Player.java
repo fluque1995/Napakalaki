@@ -531,7 +531,7 @@ public class Player {
         boolean should = false;
         Dice dice = Dice.getInstance();
         
-        if(dice.nextNumber() <= 6 ){
+        if(dice.nextNumber()  > 4){
             should = true;
             
         }
@@ -539,7 +539,7 @@ public class Player {
         return should;
     }
     
-    protected int getOponentLevel(Monster m){
+    public int getOponentLevel(Monster m){
         return m.getLevel();
     }
     
@@ -549,5 +549,9 @@ public class Player {
     
     public void setHiddenTreasures(ArrayList<Treasure> treasures){
         this.hiddenTreasures = treasures;
+    }
+    
+    public boolean isCultist(){
+        return false;
     }
 }

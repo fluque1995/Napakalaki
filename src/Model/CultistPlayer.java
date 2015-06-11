@@ -34,7 +34,7 @@ public class CultistPlayer extends Player {
     }
     
     @Override
-    protected int getOponentLevel(Monster m){
+    public int getOponentLevel(Monster m){
         return m.getSpecialValue();
     }
     
@@ -79,6 +79,14 @@ public class CultistPlayer extends Player {
         
         return printable;
                 
+    }
+    
+    public int getBonusLevel(){
+        return this.myCultistCard.getBasicValue();
+    }
+    
+    public boolean isCultist(){
+        return true;
     }
     
 }

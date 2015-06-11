@@ -1,19 +1,27 @@
 
 package Model;
 
+import GUI.NapakalakiView;
+import GUI.PlayerNamesCapture;
 import Test.GameTester;
+import java.util.ArrayList;
 
 public class EjemploMain {
 
-    public static void main(String[] args) {
-      Napakalaki game = Napakalaki.getInstance();
-      GameTester test = GameTester.getInstance();
-      
-      // Poner el numero de jugadores con el que se quiera probar
-      test.play(game, 1);
+    public static void main(String[] args){
         
-      /*ExamenPadre exam = new ExamenHijo();
-      exam.run();*/
+        Napakalaki napakalakiModel = Napakalaki.getInstance();
+        NapakalakiView napakalakiView = new NapakalakiView();
+        ArrayList<String> names = new ArrayList();
         
-    }        
+        PlayerNamesCapture namesCapture = new PlayerNamesCapture(napakalakiView, true);
+        names = namesCapture.getNames();
+        
+        Dice.createInstance(napakalakiView);
+        
+        napakalakiModel.initGame(names);
+        napakalakiView.setNapakalaki(napakalakiModel);
+        napakalakiView.showView();
+    
+    }
 }

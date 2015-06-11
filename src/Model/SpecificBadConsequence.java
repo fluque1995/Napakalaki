@@ -13,9 +13,17 @@ import java.util.ArrayList;
  */
 public class SpecificBadConsequence extends BadConsequence{
     
-    public SpecificBadConsequence(String text, int level, ArrayList<TreasureKind> tVisible, 
+    protected int levels;
+    protected ArrayList<TreasureKind> specificVisibleTreasures;
+    protected ArrayList<TreasureKind> specificHiddenTreasures;
+    
+    public SpecificBadConsequence(String text, int levels, ArrayList<TreasureKind> tVisible, 
             ArrayList<TreasureKind> tHidden){
-        super(text, level, 0, 0, tVisible, tHidden, false);
+        super(text);
+        this.levels = levels;
+        this.specificVisibleTreasures = tVisible;
+        this.specificHiddenTreasures = tHidden;
+    
     }
     
     @Override
@@ -52,6 +60,20 @@ public class SpecificBadConsequence extends BadConsequence{
          if (discarded != null){
             this.specificHiddenTreasures.remove(discarded);
          }
+    }
+    
+    @Override
+    public int getLevels(){
+        return this.levels;
+    }
+    
+    @Override
+    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
+        return this.specificVisibleTreasures;
+    }
+    @Override
+    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
+        return this.specificHiddenTreasures;
     }
     
     @Override
@@ -118,10 +140,6 @@ public class SpecificBadConsequence extends BadConsequence{
     public String toString(){
         String printable = super.toString() + "quita tesoros especificos.\n";
         
-        printable += "Text = " + this.text + "\n\t\tLevels = " + Integer.toString(levels) +
-                          ", visible treasures = " + Integer.toString(nVisibleTreasures) +
-                          ", hidden treasures = " + Integer.toString(nHiddenTreasures);
-        
         if (!this.specificVisibleTreasures.isEmpty()){
             printable += "\n\t\tSpecific visible treasures = ";
             for (TreasureKind treasure: this.specificVisibleTreasures){
@@ -137,5 +155,15 @@ public class SpecificBadConsequence extends BadConsequence{
         }
         
         return printable;
+    }
+
+    @Override
+    public int getNVisibleTreasures() {
+        return 0;
+    }
+
+    @Override
+    public int getNHiddenTreasures() {
+        return 0;
     }
 }
