@@ -67,11 +67,10 @@ public class SpecificBadConsequence extends BadConsequence{
         return this.levels;
     }
     
-    @Override
     public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
         return this.specificVisibleTreasures;
     }
-    @Override
+    
     public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
         return this.specificHiddenTreasures;
     }
@@ -79,7 +78,7 @@ public class SpecificBadConsequence extends BadConsequence{
     @Override
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
             ArrayList<Treasure> hidden){
-        BadConsequence badConsequence = this.copy();
+        SpecificBadConsequence badConsequence = this.copy();
         ArrayList<TreasureKind> treasure_visible_types = new ArrayList();
         ArrayList<TreasureKind> treasure_hidden_types = new ArrayList();
                 
@@ -122,8 +121,8 @@ public class SpecificBadConsequence extends BadConsequence{
     }
     
     @Override
-    protected BadConsequence copy(){
-        BadConsequence badConsequence;
+    protected SpecificBadConsequence copy(){
+        SpecificBadConsequence badConsequence;
         
         ArrayList<TreasureKind> newVisibleTreasures = new ArrayList();
         newVisibleTreasures.addAll(this.specificVisibleTreasures);
@@ -157,13 +156,4 @@ public class SpecificBadConsequence extends BadConsequence{
         return printable;
     }
 
-    @Override
-    public int getNVisibleTreasures() {
-        return 0;
-    }
-
-    @Override
-    public int getNHiddenTreasures() {
-        return 0;
-    }
 }

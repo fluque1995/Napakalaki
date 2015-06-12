@@ -12,10 +12,12 @@ import java.util.Random;
 
 /**
  * Clase que permite el manejo de las cartas que se utilizan en el juego. Trabaja
- * con dos mazos de cartas principalmente. Por un lado, maneja un mazo de cartas 
+ * con tres mazos de cartas principalmente. Por un lado, maneja un mazo de cartas 
  * de tipo {@link Monster}, que representan los monstruos contra los que puedes
  * combatir en el juego, y un mazo de cartas de tipo {@link Treasure}, que representan
  * los tesoros que puedes recibir al ganar los combates, y que puedes equiparte.
+ * Por último maneja un mazo de cartas de tipo {@link Cultist}, que permite modificar
+ * el comportamiento de los jugadores si se producen unas condiciones determinadas.
  * @author paco
  */
 public class CardDealer {
@@ -71,7 +73,7 @@ public class CardDealer {
     
     /**
      * Método que inicializa los mazos de cartas. Prepara el CardDealer para que
-     * pueda trabajar con los dos mazos de cartas que tiene disponibles.
+     * pueda trabajar con los distintos mazos de cartas que tiene disponibles.
      */
     public void initCards(){
         
@@ -96,6 +98,9 @@ public class CardDealer {
         Collections.shuffle(this.unusedTreasures);
     }
     
+    /**
+     * Cultist deck shuffler
+     */
     private void shuffleCultists(){
         Collections.shuffle(this.unusedCultists);
     }
@@ -156,7 +161,11 @@ public class CardDealer {
         return m;
     }
     
-    
+    /**
+     * Método que devuelve la siguiente carta de sectario dentro del mazo
+     * de sectarios sin utilizar.
+     * @return Dicha carta de sectario.
+     */
     public Cultist nextCultist(){
         return this.unusedCultists.remove(0);
     }
@@ -394,6 +403,9 @@ public class CardDealer {
         
     }
     
+    /**
+     * Cultists deck setup
+     */
     private void initCultistCardDeck(){
         this.unusedCultists.add(new Cultist("Sectario",1));
         this.unusedCultists.add(new Cultist("Sectario",1));

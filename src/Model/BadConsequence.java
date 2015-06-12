@@ -76,29 +76,6 @@ public abstract class BadConsequence {
      * @return Int que indica los niveles
      */
     public abstract int getLevels();
-    
-    /**
-     * Getter para el número de tesoros visibles perdidos.
-     * @return Número de tesoros visibles perdidos
-     */
-    public abstract int getNVisibleTreasures();
-    
-    /**
-     * Getter para el número de tesoros ocultos perdidos.
-     * @return Número de tesoros ocultos perdidos
-     */
-    public abstract int getNHiddenTreasures();
-    
-    /**
-     * Getter para el array de tesoros visibles específicos perdidos.
-     * @return Array con los tesoros visibles específicos perdidos
-     */
-    public abstract ArrayList<TreasureKind> getSpecificVisibleTreasures();
-    /**
-     * Getter para el array de tesoros ocultos específicos perdidos.
-     * @return Array con los tesoros ocultos específicos perdidos
-     */
-    public abstract ArrayList<TreasureKind> getSpecificHiddenTreasures();
 
     ////////////////////////////////////////////////////////////////////////////
     //                                                                        //
@@ -143,16 +120,14 @@ public abstract class BadConsequence {
      */
     public String toString(){
         
-        String printable = "Esto es un mal rollo con el siguiente contenido: ";
-        return printable;
+        return "Esto es un mal rollo con el siguiente contenido: ";
         
     }
     
     /**
-     * Método que copia el mal rollo sin crear identidad
+     * Método que copia el mal rollo en uno nuevo con distinta identidad
      * @return Mal rollo copiado
      */
-    
     protected abstract BadConsequence copy();
 }
 

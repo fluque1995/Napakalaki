@@ -35,12 +35,10 @@ public class NumberBadConsequence extends BadConsequence {
         return this.levels;
     }
     
-    @Override
     public int getNVisibleTreasures(){
         return this.nVisibleTreasures;
     }
     
-    @Override
     public int getNHiddenTreasures(){
         return this.nHiddenTreasures;
     }
@@ -72,10 +70,10 @@ public class NumberBadConsequence extends BadConsequence {
     }
     
     @Override
-    protected BadConsequence copy(){
-        BadConsequence badConsequence;
+    protected NumberBadConsequence copy(){
+        NumberBadConsequence badConsequence;
         
-         badConsequence = new NumberBadConsequence(this.text, 0, this.nVisibleTreasures, this.nHiddenTreasures);
+        badConsequence = new NumberBadConsequence(this.text, 0, this.nVisibleTreasures, this.nHiddenTreasures);
         
         return badConsequence;
     }
@@ -89,16 +87,6 @@ public class NumberBadConsequence extends BadConsequence {
                           ", hidden treasures = " + Integer.toString(nHiddenTreasures);
         
         return printable;
-    }
-    
-    @Override
-    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
-        return null;
-    }
-    
-    @Override
-    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
-        return null;
     }
     
 }

@@ -8,14 +8,23 @@ package Model;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase que representa al jugador sectario del juego. Cada instancia de esta 
+ * clase representa a un jugador de tipo sectario. Los jugadores se convierten
+ * en jugadores sectarios si, tras pelearse contra un monstruo, pierden el combate,
+ * les toca cumplir el mal rollo, y sacan un 6 en la siguiente tirada del dado.
+ * Convertirse en sectarios les produce una mejora de su nivel, así como un 
+ * cambio en el nivel del monstruo contra el que se pelean.
  * @author antonio
  */
 public class CultistPlayer extends Player {
     private static int totalCultistPlayers = 0;
     private Cultist myCultistCard;
     
-    
+    /**
+     * Constructor por parámetros de jugador sectario
+     * @param p Jugador que se convierte en sectario
+     * @param c Carta de sectario que se asocia al jugador
+     */
     public CultistPlayer(Player p, Cultist c){
         super(p);
         this.myCultistCard = c;
@@ -23,16 +32,34 @@ public class CultistPlayer extends Player {
         totalCultistPlayers++;
     }
     
+    /**
+     * Nivel de combate del jugador sectario. Este nivel se calcula con el nivel
+     * de combate del jugador más el valor especial de la carta de sectario 
+     * asociada a este jugador.
+     * @return Nivel de combate del jugador sectario
+     */
     @Override
     public int getCombatLevel(){
         return super.getCombatLevel() + this.myCultistCard.getSpecialValue();
     }
     
+    /**
+     * Método que devuelve si dicho jugador debe convertirse en sectario. Devuelve
+     * siempre false, ya que como el jugador ya es secatrio no puede volver a 
+     * convertirse
+     * @return 
+     */
     @Override
     protected boolean shouldConvert(){
         return false;
     }
     
+    /**
+     * Método que devuelve el nivel de combate del monstruo que se pasa como 
+     * argumento. Este método es necesario
+     * @param m
+     * @return 
+     */
     @Override
     public int getOponentLevel(Monster m){
         return m.getSpecialValue();

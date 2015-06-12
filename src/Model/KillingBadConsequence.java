@@ -28,10 +28,14 @@ public class KillingBadConsequence extends BadConsequence{
     }
     
     @Override
-    public void substractVisibleTreasure(Treasure treasure){}
+    public void substractVisibleTreasure(Treasure treasure){
+        // no sense here
+    }
     
     @Override
-    public void substractHiddenTreasure(Treasure treasure){}
+    public void substractHiddenTreasure(Treasure treasure){
+    // no sense here
+    }
     
     @Override
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> visible,
@@ -41,8 +45,8 @@ public class KillingBadConsequence extends BadConsequence{
     }
     
     @Override
-    protected BadConsequence copy(){
-        BadConsequence badConsequence;
+    protected KillingBadConsequence copy(){
+        KillingBadConsequence badConsequence;
         
         badConsequence = new KillingBadConsequence(this.getText());
         
@@ -55,29 +59,10 @@ public class KillingBadConsequence extends BadConsequence{
         printable += this.text;
         return printable;
     }
-    
+   
     @Override
     public int getLevels(){
         return 0;
     }
 
-    @Override
-    public int getNVisibleTreasures() {
-        return 0;
-    }
-
-    @Override
-    public int getNHiddenTreasures() {
-        return 0;
-    }
-    
-    @Override
-    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
-        return null;
-    }
-    
-    @Override
-    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
-        return null;
-    }
 }
