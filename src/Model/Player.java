@@ -398,7 +398,8 @@ public class Player {
     public void initTreasures(){
         this.bringToLife();
         Dice dice = Dice.getInstance();
-        int number = dice.nextNumber();
+        int number = dice.nextNumber("Tira el dado para saber con cuántos tesoros\n comienzas", 
+                "Con un 1 recibes un tesoro, con un 6\n recibes 3, y 2 con cualquier otro");
         CardDealer dealer = CardDealer.getInstance();
         if(number == 1){
             Treasure treasure = dealer.nextTreasure();
@@ -450,7 +451,7 @@ public class Player {
     }
     
     /**
-     * Constructor de copia del jugdaor
+     * Constructor de copia del jugador
      * @param p jugador que se quiere copiar
      */
     public Player(Player p){

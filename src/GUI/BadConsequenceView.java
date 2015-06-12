@@ -8,8 +8,8 @@ package GUI;
 import Model.BadConsequence;
 
 /**
- *
- * @author paco
+ * Vista de los objetos de Tipo {@link Model.BadConsequence}
+ * @author 
  */
 public class BadConsequenceView extends javax.swing.JPanel {
 

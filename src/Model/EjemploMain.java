@@ -20,7 +20,7 @@ public class EjemploMain {
         
         if(names.isEmpty()){
             JOptionPane.showMessageDialog(napakalakiView,"Debes cambiar el nombre de al menos un jugador,\n"
-                    + "si no no puede iniciarse el juego");
+                    + "si no no puede iniciarse el juego", "Error al iniciar el juego",JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
         

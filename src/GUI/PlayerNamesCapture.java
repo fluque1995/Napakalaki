@@ -22,6 +22,7 @@ public class PlayerNamesCapture extends javax.swing.JDialog {
      */
     public PlayerNamesCapture(Frame parent, boolean modal) {
         super(parent, modal);
+        this.setTitle("Nombres de los jugadores");
         initComponents();
         this.addWindowListener (new WindowAdapter() {
             @Override
@@ -148,6 +149,7 @@ public class PlayerNamesCapture extends javax.swing.JDialog {
         if (!player3.getText().equals("player3")){
             names.add(player3.getText());
         }
+        
         this.dispose();
     }//GEN-LAST:event_playButtonActionPerformed
 

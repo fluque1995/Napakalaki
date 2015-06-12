@@ -19,6 +19,7 @@ public class NapakalakiView extends javax.swing.JFrame {
      */
     public NapakalakiView() {
         initComponents();
+        this.setTitle("Napakalaki");
     }
 
     /**
@@ -177,7 +178,6 @@ public class NapakalakiView extends javax.swing.JFrame {
         this.nextTurnButton.setEnabled(true);
         
         this.playerView.setEnabledMakeVisibleButton(true);
-        this.playerView.setEnabledBuyLevelsButton(true);
         this.playerView.setEnabledDiscardTreasuresButton(true);
         
     }//GEN-LAST:event_combatButtonActionPerformed
@@ -226,6 +226,11 @@ public class NapakalakiView extends javax.swing.JFrame {
         this.combatButton.setEnabled(false);
         this.nextTurnButton.setEnabled(false);
         this.meetMonsterButton.setEnabled(true);
+        
+        this.playerView.setEnabledBuyLevelsButton(true);
+        this.playerView.setEnabledMakeVisibleButton(true);
+        this.playerView.setEnabledDiscardTreasuresButton(true);
+        
         repaint();
     }
 }
