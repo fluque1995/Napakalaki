@@ -10,9 +10,8 @@ package Model;
  * sirven para modificar el comportamiento del jugador cuando se convierte 
  * en jugador sectario. Los jugadores se convierten en sectarios si al perder 
  * un combate tienen que cumplir el mal rollo, pero vuelven a tirar un dado 
- * y sacan un 5 o un 6. Es un tipo de carta, así que implementa la interfaz
- * {@link Card}
- * @author antonio
+ * y sacan un 6. Es un tipo de carta, así que implementa la interfaz {@link Card}
+ * @author Francisco Luque y Antonio Moya
  */
 public class Cultist implements Card{
     private String name;
@@ -53,7 +52,7 @@ public class Cultist implements Card{
     /**
      * Método que devuelve un string con la información de la carta. Devuelve
      * el nombre de dicha carta más la bonificación de niveles que aporta.
-     * @return 
+     * @return String con dicha información
      */
     public String to_String(){
         return "Nombre: " + this.name + ", niveles ganados: " + Integer.toString(gainedLevels) + "\n";

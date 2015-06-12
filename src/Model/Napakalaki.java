@@ -64,6 +64,11 @@ public class Napakalaki {
     //                                                                        //    
     ////////////////////////////////////////////////////////////////////////////
     
+    /**
+     * Método que inicializa los jugadores a partir del array que contiene los 
+     * nombres
+     * @param names Array con los nombres de los jugadores
+     */
     private void initPlayers(ArrayList<String> names){
         
         this.players = new ArrayList();
@@ -76,7 +81,6 @@ public class Napakalaki {
      * Método que pasa el turno al siguiente jugador
      * @return El siguiente jugador
      */
-    
     private Player nextPlayer(){
         if (this.currentPlayerIndex == -1){
             Random rnd = new Random();

@@ -18,7 +18,7 @@ import java.util.Random;
  * los tesoros que puedes recibir al ganar los combates, y que puedes equiparte.
  * Por último maneja un mazo de cartas de tipo {@link Cultist}, que permite modificar
  * el comportamiento de los jugadores si se producen unas condiciones determinadas.
- * @author paco
+ * @author Francisco Luque y Antonio Moya
  */
 public class CardDealer {
     

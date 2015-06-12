@@ -100,11 +100,21 @@ public class Treasure implements Card{
                 + "máximo: " + Integer.toString(maxBonus) + ", tipo: " + type.name() + "\n";
     }
     
+    /**
+     * Método que devuelve el valor básico de la carta de tesoro. En este caso, el
+     * bonus mínimo que aporta la carta
+     * @return Valor mínimo de bonus de niveles que aporta el tesoro
+     */
     @Override
     public int getBasicValue(){
         return this.getMinBonus();
     }
     
+    /**
+     * Método que devuelve el valor especial de la carta de tesoro. En este caso,
+     * dicho valor es el bonus máximo de niveles que aporta la carta
+     * @return Valor máximo de bonus de niveles que aporta el tesoro
+     */
     @Override
     public int getSpecialValue(){
         return this.getMaxBonus();

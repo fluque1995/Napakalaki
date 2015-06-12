@@ -6,16 +6,11 @@
 package Model;
 
 /**
- *
- * @author antonio
- */
-
-/**
  * Interfaz de la carta. Varias clases del juego representan cartas. Esta interfaz
  * especifica los métodos que deben implementar todas las cartas del juego. Dichas
  * cartas tendrán además asociadas otras funcionalidades propias, que por tanto
  * no deben aparecer aquí
- * @author paco
+ * @author Francisco Luque y Antonio Moya
  */
 public interface Card {
     

@@ -8,8 +8,13 @@ package Model;
 import java.util.ArrayList;
 
 /**
- *
- * @author paco
+ * Clase que representa a los jugadores del juego. Cada instancia de esta clase 
+ * representa a cada uno de los jugadores del juego. Cada uno de estos objetos
+ * gestiona la actividad de cada uno de los participantes, de forma que se encarga
+ * de mantener la información sobre su nivel, tesoros que tiene tanto visibles como
+ * ocultos, y el mal rollo que le queda por cumplir. Además, se encarga de gestionar
+ * los combates entre el jugador y los monstruos.
+ * @author Francisco Luque y Antonio Moya
  */
 public class Player {
     
@@ -42,10 +47,6 @@ public class Player {
         this.dead = false;
     }
     
-/*    public void vidaTrue(){
-        this.dead = false;
-    }  
- */  
     /**
      * Increment the player level
      * @param levels Incremented levels
@@ -95,6 +96,7 @@ public class Player {
         this.level = 1;
         this.dead = true;
     }
+    
     /**
      * Make the player discard necklace. 
      */
@@ -156,7 +158,6 @@ public class Player {
      * Método que aplica el buen rollo al jugador
      * @param prize Buen rollo a aplicar
      */
-    
     public void applyPrize(Prize prize){
         int nLevels = prize.getLevels();
         this.incrementLevels(nLevels);
@@ -177,7 +178,6 @@ public class Player {
      * @param monster Monstruo contra el que lucha
      * @return El resultado del combate
      */
-    
     public CombatResult combat(Monster monster){
         CombatResult combatResult;
         int myLevel = this.getCombatLevel();
@@ -193,7 +193,7 @@ public class Player {
         }
         else{
             Dice dice = Dice.getInstance();
-            int escape = dice.nextNumber();
+            int escape = dice.nextNumber("El monstruo te va a vencer!","Si sacas un 5 o un 6 podrás escapar de él");
             
             if(escape < 5){
                 BadConsequence bad = monster.getBadConsequence();
@@ -224,6 +224,10 @@ public class Player {
         return combatResult;
     }
     
+    /**
+     * Método que devuelve el mal rollo pendiente que tiene el jugador
+     * @return Dicho mal rollo
+     */
     public BadConsequence getPendingBadConsequence(){
         return this.pendingBadConsequence;
     }
@@ -232,7 +236,6 @@ public class Player {
      * Método en que se aplica el mal rollo al jugador
      * @param badConsequence Mal rollo que se aplica
      */
-    
     public void applyBadConsequence(BadConsequence badConsequence){
         int nLevels = badConsequence.getLevels();
         this.decrementLevels(nLevels);
@@ -248,7 +251,6 @@ public class Player {
      * @param treasure Tesoro que se quiere pasar a visible
      * @return Boolean que indica si es posible o no.
      */
-    
     public boolean makeTreasureVisible(Treasure treasure){
         boolean canI = this.canMakeTreasureVisible(treasure);
         if(canI){
@@ -301,7 +303,6 @@ public class Player {
      * envía a la baraja de cartas.
      * @param treasure Tesoro visible del que te quieres descartar
      */
-    
     public void discardVisibleTreasure(Treasure treasure){
         this.visibleTreasures.remove(treasure);
         if((this.pendingBadConsequence != null) && (!this.pendingBadConsequence.isEmpty())){
@@ -318,7 +319,6 @@ public class Player {
      * envía a la baraja de cartas.
      * @param treasure Tesoro oculto del que te quieres descartar
      */
-    
     public void discardHiddenTreasure(Treasure treasure){
         this.hiddenTreasures.remove(treasure);
         if((this.pendingBadConsequence != null) && (!this.pendingBadConsequence.isEmpty())){
@@ -335,7 +335,6 @@ public class Player {
      * @param hiddenTreasures Tesoros ocultos que se quieren poner en venta para comprar un nivel
      * @return Boolean indicando si es posible comprar niveles o no
      */
-    
     public boolean buyLevels(ArrayList<Treasure> visibleTreasures, ArrayList<Treasure> hiddenTreasures){
         float levels = this.computeGoldCoinsValue(visibleTreasures);
         levels += this.computeGoldCoinsValue(hiddenTreasures);
@@ -396,7 +395,6 @@ public class Player {
      * Método en que se inician los tesoros del jugador, bien porque es su primera mano,
      * o bien porque ha muerto y comienza de nuevo.
      */
-    
     public void initTreasures(){
         this.bringToLife();
         Dice dice = Dice.getInstance();
@@ -451,6 +449,10 @@ public class Player {
         this.visibleTreasures = new ArrayList();
     }
     
+    /**
+     * Constructor de copia del jugdaor
+     * @param p jugador que se quiere copiar
+     */
     public Player(Player p){
         this.dead = p.dead;
         this.hiddenTreasures = p.hiddenTreasures;
@@ -485,6 +487,10 @@ public class Player {
         return this.name;
     }
     
+    /**
+     * Getter para el nivel del jugador
+     * @return Entero que representa el nivel
+     */
     public int getLevel(){
         return this.level;
     }
@@ -497,10 +503,6 @@ public class Player {
     public String toString(){
         String printable = "Nombre: " + this.name + "; Nivel " + Integer.toString(level) + 
                 "; CombatLevel: " + Integer.toString(this.getCombatLevel());
-        
-        /*if(this.pendingBadConsequence.isEmpty() == false && this.pendingBadConsequence != null){
-            printable += pendingBadConsequence.toString();
-        }*/
         
         if(this.visibleTreasures.isEmpty() == false){
             printable += "\nTesoros visibles:\n\t\t ";
@@ -527,11 +529,16 @@ public class Player {
                 
     }
     
+    /**
+     * Método que comprueba si el jugador debe pasar o no a ser sectario. Para ello,
+     * se lanza un dado y se comprueba si se saca un 6
+     * @return true si sale un 6, false en otro caso
+     */
     protected boolean shouldConvert(){
         boolean should = false;
         Dice dice = Dice.getInstance();
         
-        if(dice.nextNumber()  > 4){
+        if(dice.nextNumber("Te llaman desde la secta", "Si sacas un 6 te convertirás en sectario") == 6){
             should = true;
             
         }
@@ -539,18 +546,38 @@ public class Player {
         return should;
     }
     
+    /**
+     * Método que devuelve el nivel del monstruo oponente cuando se pelea contra
+     * este jugador. Devuelve el nivel básico del monstruo, ya que este tipo de 
+     * jugador no es sectario, que es el tipo de jugadores contra los que varían
+     * los monstruos de nivel
+     * @param m Monstruo del que se quiere conocer el nivel de combate
+     * @return Nivel de dicho monstruo
+     */
     public int getOponentLevel(Monster m){
         return m.getLevel();
     }
     
+    /**
+     * Método que asigna al jugador una lista de tesoros visibles (utilizado en examen)
+     * @param treasures Lista de tesoros que se asigna
+     */
     public void setVisibleTreasures(ArrayList<Treasure> treasures){
         this.visibleTreasures = treasures;
     }
     
+    /**
+     * Método que asigna al jugador una lista de tesoros ocultos (utilizado en examen)
+     * @param treasures Lista de tesoros que se asigna
+     */
     public void setHiddenTreasures(ArrayList<Treasure> treasures){
         this.hiddenTreasures = treasures;
     }
     
+    /**
+     * Método que comprueba si este jugador es sectario
+     * @return false, este jugador no es sectario.
+     */
     public boolean isCultist(){
         return false;
     }

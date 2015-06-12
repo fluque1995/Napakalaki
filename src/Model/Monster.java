@@ -36,13 +36,15 @@ public class Monster implements Card{
     ////////////////////////////////////////////////////////////////////////////
     
     /**
-     * Constructor con parámetros para el monstruo.
+     * Constructor con parámetros para el monstruo cuyo nivel cambia cuando se 
+     * pelea contra un sectario.
      * @param name Nombre del monstruo
      * @param combatLevel Nivel de combate
+     * @param levelChange Cambio en el nivel de combate contra sectario
      * @param prize Premio por victoria
      * @param bc Mal rollo por derrota
      */
-    public Monster(String name, int combatLevel,int levelChange, BadConsequence bc, Prize prize){
+    public Monster(String name, int combatLevel, int levelChange, BadConsequence bc, Prize prize){
         
         this.name = name;
         this.combatLevel = combatLevel;
@@ -51,6 +53,14 @@ public class Monster implements Card{
         this.levelChangeAgainstCultistPlayer = levelChange;
     }
     
+    /**
+     * Constructor con parámetros para el monstruo cuyo nivel no cambia al pelear 
+     * contra sectarios
+     * @param name Nombre del monstruo
+     * @param combatLevel Nivel de combate
+     * @param prize Premio por victoria
+     * @param bc Mal rollo por derrota
+     */    
     public Monster(String name, int combatLevel, BadConsequence bc, Prize prize){
         
         this.name = name;
@@ -120,11 +130,22 @@ public class Monster implements Card{
         
     }
     
+    /**
+     * Método que devuelve el valor básico de la carta de monstruo. En este caso,
+     * se refiere al nivel de combate del monstruo sin modificación
+     * @return Nivel del monstruo sin modificación
+     */
     @Override
     public int getBasicValue(){
         return this.getLevel();
     }
     
+    /**
+     * Método que devuelve el valor especial de la carta de monstruo. En este caso,
+     * se refiere al nivel de combate del monstruo más la modificación contra 
+     * jugador sectario
+     * @return Nivel del monstruo modificado
+     */
     @Override
     public int getSpecialValue(){
         return this.getLevel() + this.levelChangeAgainstCultistPlayer;

@@ -47,7 +47,7 @@ public class CultistPlayer extends Player {
      * Método que devuelve si dicho jugador debe convertirse en sectario. Devuelve
      * siempre false, ya que como el jugador ya es secatrio no puede volver a 
      * convertirse
-     * @return 
+     * @return false, ya que el jugador no puede convertirse de nuevo en sectario
      */
     @Override
     protected boolean shouldConvert(){
@@ -56,32 +56,49 @@ public class CultistPlayer extends Player {
     
     /**
      * Método que devuelve el nivel de combate del monstruo que se pasa como 
-     * argumento. Este método es necesario
-     * @param m
-     * @return 
+     * argumento. Este método es necesario ya que el nivel de combate del monstruo
+     * varía cuando combate contra un sectario
+     * @param m Monstruo al que se le quiere calcular el nivel
+     * @return Nivel de combate del monstruo
      */
     @Override
     public int getOponentLevel(Monster m){
         return m.getSpecialValue();
     }
     
+    /**
+     * Método que devuelve el número total de jugadores de tipo sectario que hay
+     * en el momento en la partida.
+     * @return Dicho número
+     */
     public static int getTotalCultistPlayers(){
         return totalCultistPlayers;
     }
     
+    /**
+     * Método que calcula el número de niveles que se pueden comprar dada una 
+     * determinada lista de tesoros. Sobrescribe al método de la clase {@link Player},
+     * ya que para los jugadores sectarios, los niveles cuestan 500 monedas en 
+     * vez de las 1000 que les cuestan a los jugadores normales.
+     * @param treasures Lista de tesoros con la que se quieren comprar los niveles
+     * @return Número de niveles que se pueden comprar
+     */
     @Override
-    protected float computeGoldCoinsValue(ArrayList<Treasure> treasure){
-        return 2*super.computeGoldCoinsValue(treasure);
+    protected float computeGoldCoinsValue(ArrayList<Treasure> treasures){
+        return 2*super.computeGoldCoinsValue(treasures);
     }
     
+    /**
+     * Método que devuelve en un string toda la información relativa al jugador
+     * sectario. Dicho String contiene el nombre del jugador, su nivel, el nivel
+     * de combate, los tesoros que el jugador lleva equipados y el mal rollo 
+     * pendiente que tiene por cumplir
+     * @return String con la información especificada
+     */
     @Override
     public String toString(){
         String printable = "Nombre: " + this.getName() + "\nEres un cultist player; Info:\n ; Nivel " + Integer.toString(this.getLevel()) + 
                 "; CombatLevel: " + Integer.toString(this.getCombatLevel());
-        
-        /*if(this.pendingBadConsequence.isEmpty() == false && this.pendingBadConsequence != null){
-            printable += pendingBadConsequence.toString();
-        }*/
         
         if(this.getVisibleTreasures().isEmpty() == false){
             printable += "\nTesoros visibles:\n\t\t ";
@@ -108,10 +125,20 @@ public class CultistPlayer extends Player {
                 
     }
     
+    /**
+     * Método que devuelve el valor de bonus que recibe el jugador por ser sectario.
+     * Este valor se extrae a partir del valor básico de la carta de sectario que
+     * el jugador tiene asociado
+     * @return Valor básico de dicha carta
+     */
     public int getBonusLevel(){
         return this.myCultistCard.getBasicValue();
     }
     
+    /**
+     * Método que comprueba si el jugador es sectario
+     * @return True, ya que el jugador ya lo es
+     */
     public boolean isCultist(){
         return true;
     }
