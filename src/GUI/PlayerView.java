@@ -14,8 +14,11 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- *
- * @author paco
+ * Clase que representa la vista gráfica del jugador dentro del juego. Mantiene
+ * toda la información del jugador que en ese momento tiene el turno: su nivel,
+ * su nivel de combate, los tesoros ocultos y visibles que tiene, y si es un 
+ * jugador normal o sectario
+ * @author Francisco Luque y Antonio Moya
  */
 public class PlayerView extends javax.swing.JPanel {
 
@@ -184,45 +187,73 @@ public class PlayerView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que gestiona el funcionamiento del botón que permite hacer visibles
+     * tesoros que el jugador tenga ocultos
+     * @param evt Evento de ratón (click)
+     */
     private void makeVisibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeVisibleActionPerformed
+        // Se crea un vector con los tesoros ocultos que están seleccionados
         ArrayList <Treasure> selHidden = this.getSelectedTreasures(this.hiddenTreasures);
         
+        // Se intentan hacer visibles dichos tesoros seleccionados
         for (Treasure t: selHidden){
             this.napakalakiModel.makeTreasureVisible(t);
         }
         
+        // Se actualiza la vista gráfica del jugador
         this.setPlayer(this.napakalakiModel.getCurrentPlayer());
         
+        // Se vuelve a pintar el jugador
         this.repaint();
     }//GEN-LAST:event_makeVisibleActionPerformed
 
+    /**
+     * Método que gestiona el funcionamiento del botón que permite comprar niveles
+     * @param evt Evento del ratón (click)
+     */
     private void buyLevelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyLevelsActionPerformed
+        // Se introducen en dos arrays los tesoros seleccionados de ambos paneles,
+        // tanto visibles como ocultos
         ArrayList <Treasure> selHidden = this.getSelectedTreasures(this.hiddenTreasures);
         ArrayList <Treasure> selVisible = this.getSelectedTreasures(this.visibleTreasures);
         
+        // Se intentan comprar los niveles
         this.playerModel.buyLevels(selVisible, selHidden);
         
+        // Se vuelven a rellenar los paneles de tesoros del jugador
         this.fillTreasurePanel(this.hiddenTreasures, this.playerModel.getHiddenTreasures());
         this.fillTreasurePanel(this.visibleTreasures, this.playerModel.getVisibleTreasures());
         
+        // Se actualiza la vista del jugador
         this.setPlayer(this.playerModel);
         
+        // Se vuelve a pintar dicha vista
         this.repaint();
     }//GEN-LAST:event_buyLevelsActionPerformed
 
+    /**
+     * Método que gestiona el funcionamiento del botón que permite al jugador
+     * descartar tesoros
+     * @param evt Evento de ratón (click)
+     */
     private void discardTreasuresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardTreasuresActionPerformed
         
+        // Se introducen en dos arrays los elementos seleccionados de ambos paneles
         ArrayList <Treasure> selHidden = this.getSelectedTreasures(this.hiddenTreasures);
         ArrayList <Treasure> selVisible = this.getSelectedTreasures(this.visibleTreasures);
         
+        // Se descartan los tesoros ocultos
         for (Treasure t: selHidden){
             this.playerModel.discardHiddenTreasure(t);
         }
         
+        // Se descartan los tesoros visibles
         for (Treasure t: selVisible){
             this.playerModel.discardVisibleTreasure(t);
         }
         
+        // Se actualiza y se vuelve a pintar la vista del jugador
         this.setPlayer(this.napakalakiModel.getCurrentPlayer());
         repaint();
     }//GEN-LAST:event_discardTreasuresActionPerformed
@@ -249,34 +280,61 @@ public class PlayerView extends javax.swing.JPanel {
     private Player playerModel;
     private Napakalaki napakalakiModel;
     
+    /**
+     * Método que asigna un jugador la a vista y la actualiza
+     * @param player Jugador que se asigna a la vista
+     */
     public void setPlayer(Player player){
+        
+        // Se asigna el jugador a la vista a través de una variable
         this.playerModel = player;
         
+        // Se le asigna valor a las etiquetas de nombre del jugador, nivel de juego
+        // y nivel de combate
         this.name.setText(this.playerModel.getName());
         this.level.setText(Integer.toString(this.playerModel.getLevel()));
         this.combatLevel.setText(Integer.toString(this.playerModel.getCombatLevel()));
         
+        // Se rellenan los paneles de tesoros visibles y ocultos
         fillTreasurePanel(this.visibleTreasures, playerModel.getVisibleTreasures());
         fillTreasurePanel(this.hiddenTreasures, playerModel.getHiddenTreasures());
         
+        // Si el jugador es sectario:
         if(this.playerModel.isCultist()){
+            // Se muestran los mensajes de que es sectario y los niveles que obtiene
+            // por ello
             this.CultistLabel.setVisible(true);
             this.bonusLevelMessage.setVisible(true);
             this.bonusLevel.setVisible(true);
             this.bonusLevel.setText(Integer.toString(((CultistPlayer)this.playerModel).getBonusLevel()));
         }
+        // Si no lo es:
         else{
+            // Se ocultan dichas etiquetas
             this.CultistLabel.setVisible(false);
             this.bonusLevelMessage.setVisible(false);
             this.bonusLevel.setVisible(false);
         }
+        
+        // Se vuelve a pintar 
         repaint();
         revalidate();
     }
+    
+    /**
+     * Método que asigna al jugador la instancia del juego
+     * @param napakalaki Instancia del juego a asignar
+     */
     public void setNapakalaki(Napakalaki napakalaki){
         this.napakalakiModel = napakalaki;
     }
     
+    /**
+     * Método que rellena un panel con vistas de tesoros. Sirve para rellenar
+     * los paneles de tesoros visibles y ocultos que tiene el jugador
+     * @param aPanel Panel que se va a rellenar
+     * @param aList Array con los elementos que se quieren introducir en el panel
+     */
     public void fillTreasurePanel (JPanel aPanel, ArrayList<Treasure> aList) {
         // Se elimina la información antigua
         aPanel.removeAll();
@@ -293,11 +351,29 @@ public class PlayerView extends javax.swing.JPanel {
         aPanel.revalidate();
     }
     
+    /**
+     * Método que permite introducir en un Array los elementos que estén seleccionados
+     * dentro de un panel. Se utiliza para capturar en un Array los elementos que 
+     * el jugador tiene seleccionados dentro de su panel.
+     * @param aPanel Panel del que se quieren seleccionar los elementos
+     * @return ArrayList con los tesoros que había seleccionados en el panel
+     */
     public ArrayList<Treasure> getSelectedTreasures(JPanel aPanel) {
+        
+        // Vista de tesoro que se utiliza para seleccionar los elementos del panel
         TreasureView tv;
+        
+        // Array que se va a devolver
         ArrayList<Treasure> output = new ArrayList();
+        
+        // Se recorren los elementos que pertenecen al panel
         for (Component c : aPanel.getComponents()) {
+            
+            // Cada componente se interpreta como vista de tesoro
             tv = (TreasureView) c;
+            
+            // Si dicho elemento está seleccionado, se introduce en el array el
+            // Treasure que representa dicha vista
             if ( tv.isSelected() )
                 output.add ( tv.getTreasure() );
         }
@@ -305,14 +381,36 @@ public class PlayerView extends javax.swing.JPanel {
         return output;
     }
     
+    /**
+     * Método que permite activar o desactivar el botón que permite convertir
+     * en visibles tesoros que el jugador tiene ocultos. Sirve para poder activar
+     * o desactivar la funcionalidad del jugador dependiendo del momento del turno
+     * del jugador en el que nos encontremos
+     * @param flag Boolean que nos indica si se activa el botón (true) o se 
+     * desactiva (false)
+     */
     public void setEnabledMakeVisibleButton(boolean flag){
         this.makeVisible.setEnabled(flag);
     }
     
+    /**
+     * Método que permite activar o desactivar el botón que permite al jugador
+     * comprar niveles. Sirve para poder activar o desactivar la funcionalidad 
+     * del jugador dependiendo del momento del turno en el que nos encontremos
+     * @param flag Boolean que nos indica si se activa el botón (true) o se 
+     * desactiva (false)
+     */
     public void setEnabledBuyLevelsButton(boolean flag){
         this.buyLevels.setEnabled(flag);
     }
     
+    /**
+     * Método que permite activar o desactivar el botón que permite al jugador
+     * descartar tesoros. Sirve para poder activar o desactivar la funcionalidad 
+     * del jugador dependiendo del momento del turno en el que nos encontremos
+     * @param flag Boolean que nos indica si se activa el botón (true) o se 
+     * desactiva (false)
+     */
     public void setEnabledDiscardTreasuresButton(boolean flag){
         this.discardTreasures.setEnabled(flag);
     }

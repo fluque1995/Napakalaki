@@ -9,8 +9,11 @@ import Model.Treasure;
 import java.awt.Color;
 
 /**
- *
- * @author paco
+ * Vista de los objetos {@link Model.Treasure}. Sirve para mostrar por pantalla 
+ * toda la información relativa a dichos tesoros. Muestra información de los bonus
+ * de nivel que aporta dicho tesoro, el tipo de tesoro y su valor en monedas de 
+ * oro
+ * @author Francisco Luque y Antonio Moya
  */
 public class TreasureView extends javax.swing.JPanel {
 
@@ -120,11 +123,19 @@ public class TreasureView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que gestiona el comportamiento cuando se selecciona el tesoro. Permite
+     * que el tesoro cambie su color de fondo si está seleccionado
+     * @param evt Evento de ratón (click sobre el tesoro)
+     */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
 
+        // Se cambia de seleccionado a deseleccionado y viceversa
         this.selected = !this.selected;
+        // Se hace opaco o no dependiendo de si está seleccionado (si se selecciona
+        // se colorea el fondo del tesoro)
         this.setOpaque(this.selected);
-
+        // Se actualiza la vista
         repaint();
     }//GEN-LAST:event_formMouseClicked
 
@@ -143,25 +154,45 @@ public class TreasureView extends javax.swing.JPanel {
 
     private Treasure treasureModel;
     private boolean selected = false;
-
+    
+    /**
+     * Método que asigna un tesoro del modelo a la vista de tesoro correspondiente
+     * y actualiza su representación en pantalla
+     * @param treasure Tesoro que se quiere visualizar
+     */
     public void setTreasure(Treasure treasure) {
 
+        // Se asigna el tesoro del modelo a una variable
         this.treasureModel = treasure;
+        
+        // Se cambia el color de fondo y se hace transparente
         this.setBackground(Color.CYAN);
         this.setOpaque(this.selected);
+        
+        // Se actualiza el valor de las etiquetas del nombre del tesoro, niveles que
+        // otorga (min y max bonus), valor en monedas de oro y el tipo de tesoro
         this.treasureName.setText(treasureModel.getName());
         this.minBonus.setText(Integer.toString(treasureModel.getBasicValue()));
         this.maxBonus.setText(Integer.toString(treasureModel.getSpecialValue()));
         this.goldCoins.setText(Integer.toString(treasureModel.getGoldCoins()));
         this.treasureKind.setText(treasureModel.getType().name());
 
+        // Se actualiza la vista por pantalla
         repaint();
     }
 
+    /**
+     * Método que devuelve si el tesoro está seleccionado
+     * @return true si el tesoro está seleccionado, false si no lo está
+     */
     public boolean isSelected() {
         return this.selected;
     }
-
+    
+    /**
+     * Método que devuelve la instancia de tesoro representada por esta vista
+     * @return Instacia de tipo {@link Model.Treasure}
+     */
     public Treasure getTreasure() {
         return this.treasureModel;
     }

@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import Model.Prize;
 
 /**
- *
- * @author paco
+ * Vista de los objetos de tipo {@link Model.prize}. Representan la información
+ * del premio que te da un monstro ({@link Model.Monster}) cuando lo derrotas en
+ * combate
+ * @author Francisco Luque y Antonio Moya
  */
 public class PrizeView extends javax.swing.JPanel {
 
@@ -83,13 +80,20 @@ public class PrizeView extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private Prize prizeView;
     
+    /**
+     * Método que asigna un premio a la vista y actualiza dicha vista en pantalla
+     * @param prize Premio que se quiere visualizar
+     */
     public void setPrize(Prize prize){
         
+        // Se asigna el modelo del premio a una variable
         this.prizeView = prize;
         
+        // Se actualizan las etiquetas de niveles y tesoros ganados
         this.levels.setText(Integer.toString(this.prizeView.getLevels()));
         this.treasures.setText(Integer.toString(this.prizeView.getTreasures()));
         
+        // Se actualiza la vista mostrada
         repaint();
     }
     

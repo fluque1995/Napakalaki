@@ -14,13 +14,13 @@ import java.util.ArrayList;
  * Existen tres tipos principales de mal rollo: 
  * <P>
  * 1.- Mal rollo que quita un número determinado de objetos y niveles
- * @see NumberBadConsequence
  * <P> 
  * 2.- Mal rollo que quita unos tesoros determinados
- * @see SpecificBadConsequence
  * <P>
  * 3.- Mal rollo en el que el monstruo te mata
  * @see KillingBadConsequence
+ * @see NumberBadConsequence
+ * @see SpecificBadConsequence
  * @see Monster
  */
 public abstract class BadConsequence {

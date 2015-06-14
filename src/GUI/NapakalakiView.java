@@ -9,13 +9,15 @@ import Model.CombatResult;
 import Model.Napakalaki;
 
 /**
- *
- * @author paco
+ * Vista principal del juego. Mantiene la ventana en la que se encuentran colocados
+ * todos los componentes que se necesitan para saber el desarrollo del juego en 
+ * ese momento
+ * @author Francisco Luque y Antonio Moya
  */
 public class NapakalakiView extends javax.swing.JFrame {
     
     /**
-     * Creates new form NapakalakiView
+     * Inicializa la vista del juego y le asigna el título a la ventana
      */
     public NapakalakiView() {
         initComponents();
@@ -130,26 +132,43 @@ public class NapakalakiView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Gestión del funcionamiento del botón que permite conocer al monstruo
+     * @param evt Evento de ratón que dispara el funcionamiento (click)
+     */
     private void meetMonsterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meetMonsterButtonActionPerformed
+        
+        // Se actualiza la vista gráfica del monstruo a partir del monstruo actual,
+        // y se muestra por pantalla. Se le cambia el nivel al monstruo dependiendo
+        // del jugador actual
         this.monsterView.setVisible(true);
         this.monsterView.setMonster(this.napakalakiModel.getCurrentMonster());
         this.monsterView.setLevelDisplay(this.napakalakiModel.getCurrentPlayer());
+        
+        // Se desactiva el botón para conocer al montruo y se activa el de combate
         this.meetMonsterButton.setEnabled(false);
         this.combatButton.setEnabled(true);
         
+        // Se inhabilita el funcionamiento de todos los botones del jugador
         this.playerView.setEnabledMakeVisibleButton(false);
         this.playerView.setEnabledBuyLevelsButton(false);
         this.playerView.setEnabledDiscardTreasuresButton(false);
 
+        // Se actualiza la vista gráfica
         this.repaint();
     }//GEN-LAST:event_meetMonsterButtonActionPerformed
 
+    /**
+     * Gestión del funcionamiento del botón que provoca el combate
+     * @param evt Evento de ratón (click)
+     */
     private void combatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combatButtonActionPerformed
         
+        // Se produce el combate
         this.result = this.napakalakiModel.combat();
         
+        // Se crea una cadena de texto cuyo valor varía dependiendo del resultado
         String resultText = null;
-        
         switch (result) {
             case WINANDWINGAME : 
               resultText = "¡¡¡ H A S   G A N A D O   L A   P A R T I D A !!!";
@@ -170,24 +189,43 @@ public class NapakalakiView extends javax.swing.JFrame {
               resultText = "Perdiste el combate pero te conviertes en sectario";
               break;
         }
+        
+        // Se actualiza el valor de la etiqueta de resultado y se muestra por pantalla
         this.combatResult.setText(resultText);
-        this.playerView.setPlayer(this.napakalakiModel.getCurrentPlayer());
         this.resultLabel.setVisible(true);
         this.combatResult.setVisible(true);
+        
+        // Se actualiza la vista del jugador
+        this.playerView.setPlayer(this.napakalakiModel.getCurrentPlayer());
+        
+        // Se deshabilita el botón de combate y se habilita el de siguiente turno
         this.combatButton.setEnabled(false);
         this.nextTurnButton.setEnabled(true);
         
+        // Se habilitan los botones del jugador que le permiten descartar y equipar tesoros
         this.playerView.setEnabledMakeVisibleButton(true);
         this.playerView.setEnabledDiscardTreasuresButton(true);
         
     }//GEN-LAST:event_combatButtonActionPerformed
 
+    /**
+     * Método que gestiona el funcionamiento del botón que permite pasar al 
+     * siguiente turno
+     * @param evt Evento del ratón que dispara la acción (click)
+     */
     private void nextTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTurnButtonActionPerformed
         
+        // Si el jugador ha ganado el combate y la partida se termina el juego,
+        // si no, se intenta pasar al siguiente turno
         if(this.result != CombatResult.WINANDWINGAME){
+            // Si se puede pasar al siguiente turno
             if(this.napakalakiModel.nextTurn()){
+                // Se actualiza la vista del juego completa
                 this.setNapakalaki(this.napakalakiModel);
+            // Si no se puede
             }else{
+                // Se muestra un cuadro de texto que informa de que no se puede
+                // pasar el turno
                 this.noNextTurnMessage.setVisible(true);
                 this.noNextTurnMessage.setEditable(false);
             }
@@ -196,9 +234,12 @@ public class NapakalakiView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nextTurnButtonActionPerformed
 
-   public void showView(){
-       this.setVisible(true);
-   }
+    /**
+     * Método que muestra la vista por pantalla
+     */
+    public void showView(){
+        this.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton combatButton;
@@ -212,25 +253,44 @@ public class NapakalakiView extends javax.swing.JFrame {
     private javax.swing.JLabel resultLabel;
     // End of variables declaration//GEN-END:variables
     private Napakalaki napakalakiModel;
-    CombatResult result;
+    private CombatResult result;
 
+    /**
+     * Método que actualiza la vista del juego, para situarla en el comienzo de
+     * un nuevo turno. Actualiza todos los objetos que forman parte de la vista
+     * gráfica, colocando la configuración original
+     * @param napakalaki Instancia del juego que se representa
+     */
     public void setNapakalaki(Napakalaki napakalaki){
         
+        // Se asigna a una variable de tipo Napakalaki el modelo del juego
         this.napakalakiModel = napakalaki;
+        
+        // Se actualiza la vista del jugador
         this.playerView.setPlayer(this.napakalakiModel.getCurrentPlayer());
+        
+        // Se le asigna al jugador la instancia de napakalaki
         this.playerView.setNapakalaki(this.napakalakiModel);
+        
+        // Se oculta la vista del monstruo, las etiquetas de resultado del combate
+        // y el mensaje de que no se puede pasar el turno
         this.monsterView.setVisible(false);
         this.resultLabel.setVisible(false);
         this.combatResult.setVisible(false);
         this.noNextTurnMessage.setVisible(false);
+        
+        // Se deshabilitan los botones de combate y siguiente turno, y se habilita
+        // el que permite conocer al monstruo
         this.combatButton.setEnabled(false);
         this.nextTurnButton.setEnabled(false);
         this.meetMonsterButton.setEnabled(true);
         
+        // Se habilitan los botones de acción del jugador
         this.playerView.setEnabledBuyLevelsButton(true);
         this.playerView.setEnabledMakeVisibleButton(true);
         this.playerView.setEnabledDiscardTreasuresButton(true);
         
+        // Se actualiza la vista gráfica
         repaint();
     }
 }

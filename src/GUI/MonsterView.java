@@ -9,13 +9,16 @@ import Model.Monster;
 import Model.Player;
 
 /**
- *
- * @author paco
+ * Vista de las cartas de monstruos del juego. Presenta en una vista gráfica toda
+ * la información relativa a los monstruos que aparecen en el juego. Informa sobre
+ * su nivel de combate, el tesoro que se obtiene al vencerlos, y el mal rollo que
+ * se aplica al jugador si pierde el combate
+ * @author Francisco Luque y Antonio Moya
  */
 public class MonsterView extends javax.swing.JPanel {
 
     /**
-     * Creates new form MonsterView
+     * Método que inicializa la vista
      */
     public MonsterView() {
         initComponents();
@@ -110,16 +113,36 @@ public class MonsterView extends javax.swing.JPanel {
 
     private Monster monsterModel;
     
+    /**
+     * Método que introduce al monstruo dentro de su vista gráfica. Inicializa 
+     * las distintas etiquetas de la vista para que muestren la información del
+     * monstruo actual
+     * @param monster Monstruo que se quiere mostrar en pantalla
+     */
     public void setMonster(Monster monster){
+        // Asignar a una variable de tipo monstruo el monstruo a representar
         this.monsterModel = monster;
+        
+        // Asignar valores a las etiquetas del nivel y el nombre del monstruo
         this.level.setText(Integer.toString(this.monsterModel.getBasicValue()));
         this.name.setText(this.monsterModel.getName());
+        
+        // Inicializar la vista gráfica del tesoro asociado al montruo
         this.prizeView.setPrize(this.monsterModel.getPrize());
+        
+        // Inicializar la vista gráfica del mal rollo asociado al montruo
         this.badConsequenceView.setBadConsequenceView(this.monsterModel.getBadConsequence());
         
+        // Se actualiza el valor del monstruo en la vista gráfica
         repaint();
     }
     
+    /**
+     * Método que permite cambiar el valor del nivel del monstruo dependiendo de
+     * su oponente. Este método es necesario dado que el nivel de los monstruos 
+     * puede variar dependiendo de si el oponente es o no sectario
+     * @param opponent Jugador que pelea contra el monstruo
+     */
     public void setLevelDisplay(Player opponent){
         this.level.setText(Integer.toString(opponent.getOponentLevel(this.monsterModel)));
         repaint();

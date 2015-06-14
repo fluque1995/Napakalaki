@@ -8,13 +8,16 @@ package GUI;
 import Model.BadConsequence;
 
 /**
- * Vista de los objetos de Tipo {@link Model.BadConsequence}
- * @author 
+ * Vista de los objetos de tipo {@link Model.BadConsequence}. Esta vista permite
+ * representar los objetos de tipo mal rollo del juego. Representan la información
+ * del mal rollo a partir de la cadena de texto que explica lo que el mal rollo
+ * produce en el jugador
+ * @author Francisco Luque y Antonio Moya
  */
 public class BadConsequenceView extends javax.swing.JPanel {
 
     /**
-     * Creates new form BadConsequenceView
+     * Método que inicializa la vista
      */
     public BadConsequenceView() {
         initComponents();
@@ -53,13 +56,22 @@ public class BadConsequenceView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea text;
     // End of variables declaration//GEN-END:variables
-    private BadConsequence badConsequenceView;
+    private BadConsequence badConsequenceModel;
     
+    /**
+     * Método que introduce un objeto de mal rollo dentro de su vista gráfica
+     * @param badConsequence Mal rollo que se quiere presentar
+     */
     public void setBadConsequenceView(BadConsequence badConsequence){
-        this.badConsequenceView = badConsequence;
+        // Asignar el mal rollo a representar a una variable
+        this.badConsequenceModel = badConsequence;
     
-        this.text.setText(this.badConsequenceView.getText());
+        // Actualizar el cuadro de texto donde se escribe el texto y convertirlo
+        // en no editable
+        this.text.setText(this.badConsequenceModel.getText());
         this.text.setEditable(false);
+        
+        // Volver a pintar el cuadro
         repaint();
     }
 }

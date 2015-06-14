@@ -11,14 +11,15 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 /**
- *
- * @author paco
+ * Representación de la ventana con la que se inicia el juego, que es un cuadro
+ * de diálogo que permite recoger los nombres de los jugadores de la partida.
+ * @author Francisco Luque y Antonio Moya
  */
 public class PlayerNamesCapture extends javax.swing.JDialog {
 
     private ArrayList<String> names = new ArrayList();
     /**
-     * Creates new form PlayerNamesCapture
+     * Crea la ventana de diálogo y la muestra por pantalla
      */
     public PlayerNamesCapture(Frame parent, boolean modal) {
         super(parent, modal);
@@ -135,11 +136,23 @@ public class PlayerNamesCapture extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_player1ActionPerformed
 
+    /**
+     * Método que maneja el botón de cancelar de la ventana. Termina el programa
+     * @param evt Evento de ratón (click)
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    /**
+     * Método que maneja la acción del botón jugar de la ventana. Inicia el juego
+     * con los jugadores que hayan cambiado el nombre en su cuadro de texto.
+     * @param evt Evento de ratón (click)
+     */
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        
+        // Si alguna de las cadenas de texto ha cambiado, se introduce ese jugador
+        // en el array de nombres de jugadores
         if (!player1.getText().equals("player1")){
             names.add(player1.getText());
         }
@@ -153,6 +166,10 @@ public class PlayerNamesCapture extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_playButtonActionPerformed
 
+    /**
+     * Método que devuelve el array de nombres que se han leído en la ventana
+     * @return Dicho array con los nombres
+     */
     public ArrayList<String> getNames() {
         this.setVisible(true);
         return names;
